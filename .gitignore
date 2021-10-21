@@ -1,0 +1,19 @@
+# node
+node_modules
+
+# dist
+dist
+
+# test
+/coverage
+
+# editor
+.vscode
+.idea
+
+# misc
+.DS_Store
+dist-ssr
+*.local
+debug.log*
+error.log*
