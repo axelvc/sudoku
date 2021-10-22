@@ -1,28 +1,50 @@
 import { FC } from 'react'
 
-const Controls: FC = () => (
-  <section>
-    <div>
-      <button>marks</button>
-      <button>erase</button>
-      <button>help</button>
-      <button>validate</button>
-      <button>undo</button>
-      <button>reset</button>
-    </div>
+import Switch from '../common/Switch'
+import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { setFillValue, setMarksEnabled } from './controlsSlice'
 
-    <div>
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>4</button>
-      <button>5</button>
-      <button>6</button>
-      <button>7</button>
-      <button>8</button>
-      <button>9</button>
-    </div>
-  </section>
-)
+const NUMPAD_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+const Controls: FC = () => {
+  const dispatch = useAppDispatch()
+  const marksEnabled = useAppSelector(state => state.controls.marksEnabled)
+  const fillValue = useAppSelector(state => state.controls.fillValue)
+
+  function updateFillValue(value: number): void {
+    const newFillValue = fillValue === value ? null : value
+
+    dispatch(setFillValue(newFillValue))
+  }
+
+  return (
+    <section>
+      <div>
+        <Switch
+          pressed={marksEnabled}
+          onClick={() => dispatch(setMarksEnabled(!marksEnabled))}
+        >
+          marks
+        </Switch>
+        <Switch pressed={fillValue === 0} onClick={() => updateFillValue(0)}>
+          erase
+        </Switch>
+        {/* TODO: add actions to these buttons */}
+        <button>help</button>
+        <button>validate</button>
+        <button>undo</button>
+        <button>reset</button>
+      </div>
+
+      <div>
+        {NUMPAD_NUMBERS.map(n => (
+          <Switch key={n} pressed={fillValue === n} onClick={() => updateFillValue(n)}>
+            {n}
+          </Switch>
+        ))}
+      </div>
+    </section>
+  )
+}
 
 export default Controls
