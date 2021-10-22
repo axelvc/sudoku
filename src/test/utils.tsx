@@ -6,12 +6,18 @@ import { FC, ReactElement } from 'react'
 import { Provider } from 'react-redux'
 
 import controlsSlice from '../controls/controlsSlice'
+import sudokuSlice from '../sudoku/sudokuSlice'
 
 export function render(
   ui: ReactElement,
   options?: Omit<RenderOptions, 'wrapper'>,
 ): RenderResult {
-  const store = configureStore({ reducer: { controls: controlsSlice } })
+  const store = configureStore({
+    reducer: {
+      controls: controlsSlice,
+      sudoku: sudokuSlice,
+    },
+  })
 
   const Wrapper: FC = ({ children }) => <Provider store={store}>{children}</Provider>
 

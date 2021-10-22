@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-export interface ControlsState {
+interface ControlsState {
   fillValue: number | null
   marksEnabled: boolean
 }
