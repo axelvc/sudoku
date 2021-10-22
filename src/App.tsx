@@ -1,5 +1,15 @@
 import { FC } from 'react'
 
-const App: FC = () => <h1>Hello world!</h1>
+import { Provider } from 'react-redux'
+import Controls from './controls/Controls'
+import store from './store/store'
+
+const App: FC = () => (
+  <main>
+    <Provider store={store}>
+      <Controls />
+    </Provider>
+  </main>
+)
 
 export default App
