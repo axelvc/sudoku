@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Sudoku, ResponseType } from './sudokuService'
 
 interface SudokuState {
-  solution: number[][]
-  puzzle: number[][]
+  solution: Sudoku
+  puzzle: Sudoku
 }
 
 const initialState: SudokuState = {
@@ -13,9 +14,14 @@ const initialState: SudokuState = {
 const sudokuSlice = createSlice({
   name: 'sudoku',
   initialState,
-  reducers: {},
+  reducers: {
+    setSudoku(state, { payload: { puzzle, solution } }: PayloadAction<ResponseType>) {
+      state.solution = solution
+      state.puzzle = puzzle
+    },
+  },
 })
 
 export default sudokuSlice.reducer
 
-// export const { } = sudokuSlice.actions
+export const { setSudoku } = sudokuSlice.actions
