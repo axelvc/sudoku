@@ -32,7 +32,7 @@ const Sudoku: FC = () => {
 
       <div>
         {puzzle.map((row, rI) =>
-          row.map((value, cI) => <button key={`${rI}${cI}`}>{value}</button>),
+          row.map((box, cI) => <button key={`${rI}${cI}`}>{box.value}</button>),
         )}
       </div>
     </section>
