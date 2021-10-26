@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Sudoku, ResponseType } from './sudokuService'
 
+export interface FillData {
+  row: number
+  col: number
+  value: number
+}
+
 interface BoxData {
   value: number
   marks: number[]
@@ -37,9 +43,16 @@ const sudokuSlice = createSlice({
       state.solution = solution
       state.puzzle = parsePuzzle(puzzle)
     },
+    fillBox(state, { payload: { row, col, value } }: PayloadAction<FillData>) {
+      const box = state.puzzle[row][col]
+
+      if (box.blocked) return
+
+      box.value = box.value === value ? 0 : value
+    },
   },
 })
 
-export default sudokuSlice.reducer
+export const { setSudoku, fillBox } = sudokuSlice.actions
 
-export const { setSudoku } = sudokuSlice.actions
+export default sudokuSlice.reducer

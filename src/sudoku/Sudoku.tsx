@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { useAppDispatch, useAppSelector, useAppStore } from '../store/hooks'
 import { difficulties, fetchSudoku } from './sudokuService'
-import { setSudoku } from './sudokuSlice'
+import { fillBox, setSudoku, FillData } from './sudokuSlice'
 
 import DropDown from '../common/DropDown'
 import Timer from './Timer'
@@ -10,6 +10,7 @@ const Sudoku: FC = () => {
   const [difficulty, setDifficulty] = useState('easy')
   const puzzle = useAppSelector(state => state.sudoku.puzzle)
   const dispatch = useAppDispatch()
+  const store = useAppStore()
 
   useEffect(() => {
     fetchSudoku(difficulty)
@@ -18,6 +19,14 @@ const Sudoku: FC = () => {
         // TODO: handle error
       })
   }, [difficulty])
+
+  function fillBoxWithControlValue({ row, col }: Omit<FillData, 'value'>): void {
+    const { fillValue: value } = store.getState().controls
+
+    if (value === null) return
+
+    dispatch(fillBox({ row, col, value: value }))
+  }
 
   return (
     <section>
@@ -31,8 +40,16 @@ const Sudoku: FC = () => {
       </header>
 
       <div>
-        {puzzle.map((row, rI) =>
-          row.map((box, cI) => <button key={`${rI}${cI}`}>{box.value}</button>),
+        {puzzle.map((arr, row) =>
+          arr.map((box, col) => (
+            <button
+              key={`${row}${col}`}
+              disabled={box.blocked}
+              onClick={() => fillBoxWithControlValue({ row, col })}
+            >
+              {box.value}
+            </button>
+          )),
         )}
       </div>
     </section>
