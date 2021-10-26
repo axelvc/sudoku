@@ -20,12 +20,12 @@ const Sudoku: FC = () => {
       })
   }, [difficulty])
 
-  function fillBoxWithControlValue({ row, col }: Omit<FillData, 'value'>): void {
-    const { fillValue: value } = store.getState().controls
+  function fillBoxWithControlValue(coords: Omit<FillData, 'value'>): void {
+    const { fillValue: value, marksEnabled } = store.getState().controls
 
     if (value === null) return
 
-    dispatch(fillBox({ row, col, value: value }))
+    dispatch(fillBox({ ...coords, value, isMark: marksEnabled }))
   }
 
   return (
@@ -42,13 +42,17 @@ const Sudoku: FC = () => {
       <div>
         {puzzle.map((arr, row) =>
           arr.map((box, col) => (
-            <button
-              key={`${row}${col}`}
-              disabled={box.blocked}
-              onClick={() => fillBoxWithControlValue({ row, col })}
-            >
-              {box.value}
-            </button>
+            <div key={`${row}${col}`}>
+              <button
+                disabled={box.blocked}
+                onClick={() => fillBoxWithControlValue({ row, col })}
+              >
+                {Boolean(box.value) && box.value}
+              </button>
+              {box.marks.map(mark => (
+                <span key={mark}>{mark}</span>
+              ))}
+            </div>
           )),
         )}
       </div>

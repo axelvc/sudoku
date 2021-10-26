@@ -5,6 +5,7 @@ export interface FillData {
   row: number
   col: number
   value: number
+  isMark?: boolean
 }
 
 interface BoxData {
@@ -25,7 +26,7 @@ function parsePuzzle(puzzle: Sudoku): BoxData[][] {
       value,
       marks: [],
       error: false,
-      blocked: value === 0,
+      blocked: value !== 0,
     })),
   )
 }
@@ -43,12 +44,25 @@ const sudokuSlice = createSlice({
       state.solution = solution
       state.puzzle = parsePuzzle(puzzle)
     },
-    fillBox(state, { payload: { row, col, value } }: PayloadAction<FillData>) {
+    fillBox(state, { payload: { row, col, value, isMark } }: PayloadAction<FillData>) {
       const box = state.puzzle[row][col]
 
       if (box.blocked) return
 
-      box.value = box.value === value ? 0 : value
+      if (isMark) {
+        const index = box.marks.indexOf(value)
+
+        if (index === -1) {
+          box.marks.push(value)
+        } else {
+          box.marks.splice(index, 1)
+        }
+
+        box.value = 0
+      } else {
+        box.value = box.value === value ? 0 : value
+        box.marks = []
+      }
     },
   },
 })
