@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector, useAppStore } from '../store/hooks'
 import { difficulties, fetchSudoku } from './sudokuService'
@@ -5,6 +6,7 @@ import { fillBox, setSudoku, FillData } from './sudokuSlice'
 
 import DropDown from '../common/DropDown'
 import Timer from './Timer'
+import { Box, BoxMarks, BoxValue, Header, Mark, SudokuGrid } from './Sudoku.style'
 
 const Sudoku: FC = () => {
   const [difficulty, setDifficulty] = useState('easy')
@@ -30,32 +32,36 @@ const Sudoku: FC = () => {
 
   return (
     <section>
-      <header>
+      <Header>
         <Timer />
         <DropDown
           options={difficulties}
           selected={difficulty}
           onChange={value => setDifficulty(value)}
         />
-      </header>
+      </Header>
 
-      <div>
+      <SudokuGrid>
         {puzzle.map((arr, row) =>
           arr.map((box, col) => (
-            <div key={`${row}${col}`}>
-              <button
+            <Box key={`${row}${col}`}>
+              <BoxValue
                 disabled={box.blocked}
                 onClick={() => fillBoxWithControlValue({ row, col })}
               >
                 {Boolean(box.value) && box.value}
-              </button>
-              {box.marks.map(mark => (
-                <span key={mark}>{mark}</span>
-              ))}
-            </div>
+              </BoxValue>
+              <BoxMarks>
+                {box.marks.map(mark => (
+                  <Mark key={mark} mark={mark}>
+                    {mark}
+                  </Mark>
+                ))}
+              </BoxMarks>
+            </Box>
           )),
         )}
-      </div>
+      </SudokuGrid>
     </section>
   )
 }
