@@ -35,7 +35,7 @@ export default createGlobalStyle`
     font: 500 1rem 'Poppins', sans-serif;
     color: var(--color-gray-900);
     letter-spacing: 0.03rem;
-    background: var(---color-gray-100);
+    background: var(--color-gray-100);
   }
 
   main {
@@ -48,5 +48,9 @@ export default createGlobalStyle`
     cursor: pointer;
     background: none;
     border: none;
+  }
+
+  li {
+    list-style: none;
   }
 `

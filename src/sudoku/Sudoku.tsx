@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector, useAppStore } from '../store/hooks'
 import { difficulties, fetchSudoku } from './sudokuService'
 import { fillBox, setSudoku, FillData } from './sudokuSlice'
 
-import DropDown from '../common/DropDown'
+import DropDown from '../common/DropDown/DropDown'
 import Timer from './Timer'
 import { Box, BoxMarks, BoxValue, Header, Mark, SudokuGrid } from './Sudoku.style'
 
