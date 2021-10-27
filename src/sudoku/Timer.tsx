@@ -1,5 +1,7 @@
 import { FC, useEffect, useState } from 'react'
 
+import Button from '../common/Button'
+
 const SECOND_IN_MILLISECONDS = 1_000
 const MINUTE_IN_SECONDS = 60
 
@@ -23,9 +25,10 @@ const Timer: FC = () => {
   const secs = seconds % MINUTE_IN_SECONDS
 
   return (
-    <button role="timer" onClick={() => setRunning(!running)}>
+    <Button role="timer" onClick={() => setRunning(!running)}>
+      <span>{running ? '⏸️' : '▶️'}</span>
       {padTime(mins)}:{padTime(secs)}
-    </button>
+    </Button>
   )
 }
 
