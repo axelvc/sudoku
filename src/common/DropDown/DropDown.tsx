@@ -1,6 +1,7 @@
 import { FC, useEffect, useRef, useState } from 'react'
 
-import { Button, DropDownContainer, OptionButton, Ul } from './DropDown.style'
+import { DropDownContainer, OptionButton, SelectedButton, Ul } from './DropDown.style'
+import CaretDown from '../svg/CaretDown.svg'
 
 interface Props {
   options: string[]
@@ -51,9 +52,14 @@ const DropDown: FC<Props> = ({ options, selected, onChange }) => {
 
   return (
     <DropDownContainer onKeyDown={ev => closeListByKeyboard(ev.key)}>
-      <Button role="combobox" aria-expanded={visible} onClick={() => setVisible(true)}>
+      <SelectedButton
+        role="combobox"
+        aria-expanded={visible}
+        onClick={() => setVisible(true)}
+      >
         {selected}
-      </Button>
+        <CaretDown />
+      </SelectedButton>
       {visible && (
         <Ul
           role="listbox"

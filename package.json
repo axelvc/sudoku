@@ -50,7 +50,8 @@
     "stylelint-order": "^4.1.0",
     "typescript": "^4.4.4",
     "vite": "^2.6.10",
-    "vite-plugin-checker": "^0.3.4"
+    "vite-plugin-checker": "^0.3.4",
+    "vite-plugin-react-svg": "^0.2.0"
   },
   "lint-staged": {
     "*.{css,md,json}": [

@@ -6,6 +6,11 @@ export const Header = styled.header`
   margin: 0.75rem;
 `
 
+export const TimerIconContainer = styled.span`
+  display: flex;
+  height: 1rem;
+`
+
 export const SudokuGrid = styled.div`
   display: grid;
   grid-template: repeat(9, 1fr) / repeat(9, 1fr);

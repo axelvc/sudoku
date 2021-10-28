@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import Button from '../Button'
 
 export { Button }
@@ -19,6 +20,18 @@ export const Ul = styled.ul`
   background: var(--color-gray-100);
   border-radius: 0.5rem;
   box-shadow: 0 0.5rem 0.75rem 0.25rem rgba(50, 50, 50, 0.2);
+`
+
+export const SelectedButton = styled(Button)`
+  svg {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &[aria-expanded='true'] {
+    svg {
+      transform: rotate(180deg);
+    }
+  }
 `
 
 export const OptionButton = styled(Button)`
