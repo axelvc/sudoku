@@ -10,41 +10,71 @@ interface Props {
 
 const DropDown: FC<Props> = ({ options, selected, onChange }) => {
   const [visible, setVisible] = useState(false)
-  const list = useRef<HTMLUListElement>(null)
+  const optionList = useRef<HTMLUListElement>(null)
+  const optionItem = useRef<HTMLButtonElement[]>([])
 
-  function handleClickOption(option: string): void {
-    onChange?.(option)
-    setVisible(false)
-  }
-
-  // hidden on click outside
+  // hide menu on click outside
   useEffect(() => {
     if (!visible) return
 
     function closeListOnClickOutside(ev: MouseEvent | FocusEvent): void {
-      if (list.current && !list.current.contains(ev.target as Node)) {
+      if (optionList.current && !optionList.current.contains(ev.target as Node)) {
         setVisible(false)
       }
     }
 
     document.addEventListener('click', closeListOnClickOutside)
     return () => document.removeEventListener('click', closeListOnClickOutside)
-  }, [visible, list])
+  }, [visible, optionList])
+
+  function closeListByKeyboard(key: string): void {
+    if (!visible) return
+
+    if (key === 'Escape' || key === 'Tab') {
+      setVisible(false)
+    }
+  }
+
+  function arrowKeyNavigate(ev: React.KeyboardEvent<HTMLButtonElement>, i: number): void {
+    const $items = optionItem.current
+
+    if (ev.key === 'ArrowUp') {
+      ev.preventDefault()
+
+      $items.at(i - 1)?.focus()
+    } else if (ev.key === 'ArrowDown') {
+      ev.preventDefault()
+
+      $items.at((i + 1) % $items.length)?.focus()
+    }
+  }
 
   return (
-    <DropDownContainer>
+    <DropDownContainer onKeyDown={ev => closeListByKeyboard(ev.key)}>
       <Button role="combobox" aria-expanded={visible} onClick={() => setVisible(true)}>
         {selected}
       </Button>
       {visible && (
-        <Ul role="listbox" ref={list}>
-          {options.map(option => (
+        <Ul
+          role="listbox"
+          ref={optionList}
+          onMouseOver={ev => (ev.target as HTMLElement).focus()}
+        >
+          {options.map((option, i) => (
             <li key={option}>
               <OptionButton
                 key={option}
                 role="option"
-                onClick={() => handleClickOption(option)}
+                tabIndex={-1}
                 autoFocus={option === selected}
+                ref={el => {
+                  if (el) optionItem.current[i] = el
+                }}
+                onClick={() => {
+                  onChange?.(option)
+                  setVisible(false)
+                }}
+                onKeyDown={ev => arrowKeyNavigate(ev, i)}
               >
                 {option}
               </OptionButton>

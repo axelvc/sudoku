@@ -48,6 +48,10 @@ export default createGlobalStyle`
     cursor: pointer;
     background: none;
     border: none;
+
+    &:disabled {
+      pointer-events: none;
+    }
   }
 
   li {
