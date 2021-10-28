@@ -49,7 +49,10 @@ const sudokuSlice = createSlice({
 
       if (box.blocked) return
 
-      if (isMark) {
+      if (value === 0) {
+        box.value = 0
+        box.marks = []
+      } else if (isMark) {
         const index = box.marks.indexOf(value)
 
         if (index === -1) {
