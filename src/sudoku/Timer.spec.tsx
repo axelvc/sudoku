@@ -1,4 +1,4 @@
-import { render, screen, userEvent } from '../test/utils'
+import { render, screen, userEvent, act } from '../test/utils'
 
 import Timer from './Timer'
 
@@ -27,12 +27,17 @@ describe('Timer component', () => {
 
     // start timer
     userEvent.click($timer)
-    jest.advanceTimersToNextTimer()
+    act(() => {
+      jest.advanceTimersToNextTimer()
+    })
+
     expect($timer).toHaveTextContent('00:01')
 
     // stop timer
     userEvent.click($timer)
-    jest.advanceTimersToNextTimer()
+    act(() => {
+      jest.advanceTimersToNextTimer()
+    })
     expect($timer).toHaveTextContent('00:01')
   })
 
@@ -40,7 +45,9 @@ describe('Timer component', () => {
     const $timer = screen.getByRole('timer')
 
     userEvent.click($timer)
-    jest.advanceTimersByTime(1_000 * 61)
+    act(() => {
+      jest.advanceTimersByTime(1_000 * 61)
+    })
 
     expect($timer).toHaveTextContent('01:01')
   })
