@@ -18,7 +18,7 @@ export const Ul = styled.ul`
   margin-top: 0.25rem;
   background: var(--color-gray-100);
   border-radius: 0.5rem;
-  box-shadow: 0 0.5rem 0.875rem 0.125rem rgba(50, 50, 50, 0.1);
+  box-shadow: 0 0.5rem 0.75rem 0.25rem rgba(50, 50, 50, 0.2);
 `
 
 export const OptionButton = styled(Button)`
@@ -27,13 +27,11 @@ export const OptionButton = styled(Button)`
   background: none;
   border-radius: 0.25rem;
 
-  &:hover,
   &:focus {
-    background: var(--color-blue-100);
+    background: var(--background-hover);
   }
 
-  &:active {
-    color: var(--color-blue-400);
-    background: var(--color-blue-200);
-  }
+  --color-active: var(--color-blue-400);
+  --background-hover: var(--color-blue-100);
+  --background-active: var(--color-blue-200);
 `

@@ -40,7 +40,7 @@ export const ControlsGrid = styled.div<ControlGridProps>`
 
 const numpadColors = css`
   /* stylelint-ignore */
-  --color: var(--color-green-500);
+  --color: var(--color-green-400);
   --background: var(--color-green-100);
   --background-hover: var(--color-green-200);
   --background-active: var(--color-green-400);
