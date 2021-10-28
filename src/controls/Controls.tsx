@@ -1,8 +1,8 @@
 import { FC } from 'react'
-
-import Switch from '../common/Switch'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { setFillValue, setMarksEnabled } from './controlsSlice'
+
+import { ControlButton, ControlsGrid, ControlSwitch, Section } from './Controls.style'
 
 const NUMPAD_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
@@ -18,32 +18,42 @@ const Controls: FC = () => {
   }
 
   return (
-    <section>
-      <div>
-        <Switch
+    <Section>
+      <ControlsGrid cols={2} rows={3}>
+        <ControlSwitch
+          title="marks"
           pressed={marksEnabled}
           onClick={() => dispatch(setMarksEnabled(!marksEnabled))}
         >
-          marks
-        </Switch>
-        <Switch pressed={fillValue === 0} onClick={() => updateFillValue(0)}>
-          erase
-        </Switch>
+          ✏️
+        </ControlSwitch>
+        <ControlSwitch
+          title="erase"
+          pressed={fillValue === 0}
+          onClick={() => updateFillValue(0)}
+        >
+          🧽
+        </ControlSwitch>
         {/* TODO: add actions to these buttons */}
-        <button>help</button>
-        <button>validate</button>
-        <button>undo</button>
-        <button>reset</button>
-      </div>
+        <ControlButton title="help">💡</ControlButton>
+        <ControlButton title="validate">☑️</ControlButton>
+        <ControlButton title="undo">↩️</ControlButton>
+        <ControlButton title="reset">🔄</ControlButton>
+      </ControlsGrid>
 
-      <div>
+      <ControlsGrid cols={3} rows={3}>
         {NUMPAD_NUMBERS.map(n => (
-          <Switch key={n} pressed={fillValue === n} onClick={() => updateFillValue(n)}>
+          <ControlSwitch
+            numpad
+            key={n}
+            pressed={fillValue === n}
+            onClick={() => updateFillValue(n)}
+          >
             {n}
-          </Switch>
+          </ControlSwitch>
         ))}
-      </div>
-    </section>
+      </ControlsGrid>
+    </Section>
   )
 }
 

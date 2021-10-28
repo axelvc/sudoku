@@ -13,11 +13,13 @@ export default createGlobalStyle`
     --color-blue-200: #c2dbff;
     --color-blue-400: #558ce2;
     --color-blue-500: #2f71da;
-    --color-green-50: #dbf0e4;
-    --color-green-100: #b9dfc9;
+    --color-blue-600: #2361c5;
+    --color-green-100: #dbf0e4;
+    --color-green-200: #b9dfc9;
     --color-green-300: #8fbca8;
     --color-green-400: #76ad96;
     --color-green-500: #528972;
+    --color-green-600: #487864;
     --color-red-100: #ffc3c3;
     --color-red-300: #fa9ea0;
     --color-red-500: #da2f35;
@@ -40,7 +42,9 @@ export default createGlobalStyle`
 
   main {
     display: grid;
+    grid-template-rows: auto 1fr;
     gap: 1.5rem;
+    min-height: 100vh;
   }
 
   button {
