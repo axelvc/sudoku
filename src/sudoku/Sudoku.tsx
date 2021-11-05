@@ -46,6 +46,7 @@ const Sudoku: FC = () => {
           arr.map((box, col) => (
             <Box
               key={`${row}${col}`}
+              data-testid={`box-${row}-${col}`}
               hasMarks={box.marks.length >= 1}
               disabled={box.blocked}
               onClick={() => fillBoxWithControlValue({ row, col })}

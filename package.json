@@ -45,6 +45,7 @@
     "jsdom": "^18.0.0",
     "lint-staged": "^11.2.3",
     "pre-commit": "^1.2.2",
+    "regenerator-runtime": "^0.13.9",
     "stylelint": "^13.13.1",
     "stylelint-config-recess-order": "^2.5.0",
     "stylelint-config-standard": "^22.0.0",

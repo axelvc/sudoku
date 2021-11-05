@@ -60,6 +60,7 @@ const Controls: FC = () => {
           <ControlSwitch
             numpad
             key={n}
+            data-testid={`numpad-${n}`}
             pressed={fillValue === n}
             onClick={() => updateFillValue(n)}
           >
