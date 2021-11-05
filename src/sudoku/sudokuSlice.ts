@@ -1,21 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Sudoku, ResponseType } from './sudokuService'
+import checkCollisions from './utils/checkCollisions'
 
-export interface FillData {
+export interface Coords {
   row: number
   col: number
+}
+
+export interface FillData extends Coords {
   value: number
   isMark?: boolean
 }
 
-interface BoxData {
+export interface BoxData {
   value: number
   marks: number[]
-  error: boolean
+  errors: number
   blocked: boolean
 }
 
-interface SudokuState {
+export interface SudokuState {
   solution: Sudoku
   puzzle: BoxData[][]
 }
@@ -25,7 +29,7 @@ function parsePuzzle(puzzle: Sudoku): BoxData[][] {
     row.map(value => ({
       value,
       marks: [],
-      error: false,
+      errors: 0,
       blocked: value !== 0,
     })),
   )
@@ -46,6 +50,7 @@ const sudokuSlice = createSlice({
     },
     fillBox(state, { payload: { row, col, value, isMark } }: PayloadAction<FillData>) {
       const box = state.puzzle[row][col]
+      const oldValue = box.value
 
       if (box.blocked) return
 
@@ -65,6 +70,10 @@ const sudokuSlice = createSlice({
       } else {
         box.value = box.value === value ? 0 : value
         box.marks = []
+      }
+
+      if (oldValue !== box.value) {
+        checkCollisions(state, { row, col }, oldValue)
       }
     },
   },

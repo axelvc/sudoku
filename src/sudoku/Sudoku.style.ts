@@ -22,6 +22,7 @@ export const SudokuGrid = styled.div`
 
 interface BoxProps {
   hasMarks: boolean
+  error: boolean
 }
 
 export const Box = styled.button<BoxProps>`
@@ -33,6 +34,13 @@ export const Box = styled.button<BoxProps>`
   color: var(--color-fg);
   background: var(--color-gray-200);
   border-radius: 0.2rem;
+
+  ${({ error }) =>
+    error &&
+    css`
+      color: var(--color-red-500);
+      background: var(--color-red-100);
+    `}
 
   ${({ hasMarks }) =>
     hasMarks &&

@@ -2,7 +2,7 @@
 import { FC, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector, useAppStore } from '../store/hooks'
 import { difficulties, fetchSudoku } from './sudokuService'
-import { fillBox, setSudoku, FillData } from './sudokuSlice'
+import { fillBox, setSudoku, Coords } from './sudokuSlice'
 
 import DropDown from '../common/DropDown/DropDown'
 import Timer from './Timer'
@@ -22,7 +22,7 @@ const Sudoku: FC = () => {
       })
   }, [difficulty])
 
-  function fillBoxWithControlValue(coords: Omit<FillData, 'value'>): void {
+  function fillBoxWithControlValue(coords: Coords): void {
     const { fillValue: value, marksEnabled } = store.getState().controls
 
     if (value === null) return
@@ -48,6 +48,7 @@ const Sudoku: FC = () => {
               key={`${row}${col}`}
               data-testid={`box-${row}-${col}`}
               hasMarks={box.marks.length >= 1}
+              error={box.errors > 0}
               disabled={box.blocked}
               onClick={() => fillBoxWithControlValue({ row, col })}
             >
