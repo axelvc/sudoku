@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sudoku component collision feedback should add error styles by collision on block 1`] = `
+.c0 {
+  position: relative;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: var(--color-fg);
+  background: var(--color-gray-200);
+  border-radius: 0.2rem;
+  color: var(--color-red-500);
+  background: var(--color-red-100);
+}
+
+<button
+  class="c0"
+  data-testid="box-0-0"
+>
+  <span>
+    1
+  </span>
+</button>
+`;
+
+exports[`Sudoku component collision feedback should add error styles by collision on col 1`] = `
+.c0 {
+  position: relative;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: var(--color-fg);
+  background: var(--color-gray-200);
+  border-radius: 0.2rem;
+  color: var(--color-red-500);
+  background: var(--color-red-100);
+}
+
+<button
+  class="c0"
+  data-testid="box-0-0"
+>
+  <span>
+    1
+  </span>
+</button>
+`;
+
+exports[`Sudoku component collision feedback should add error styles by collision on row 1`] = `
+.c0 {
+  position: relative;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: var(--color-fg);
+  background: var(--color-gray-200);
+  border-radius: 0.2rem;
+  color: var(--color-red-500);
+  background: var(--color-red-100);
+}
+
+<button
+  class="c0"
+  data-testid="box-0-0"
+>
+  <span>
+    1
+  </span>
+</button>
+`;
