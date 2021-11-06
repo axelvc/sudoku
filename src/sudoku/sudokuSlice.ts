@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { AppThunk } from '../store/store'
 import { Sudoku, ResponseType } from './sudokuService'
 import checkCollisions from './utils/checkCollisions'
 
@@ -94,5 +95,24 @@ const sudokuSlice = createSlice({
 })
 
 export const { setSudoku, fillBox, validateSudoku } = sudokuSlice.actions
+
+export const HelpFill = (): AppThunk => (dispatch, getState) => {
+  const { puzzle, solution } = getState().sudoku
+  const total = puzzle.length ** 2
+  const visited = new Set<number>()
+  let row: number
+  let col: number
+
+  do {
+    if (visited.size === total) return
+
+    row = Math.floor(Math.random() * 9)
+    col = Math.floor(Math.random() * 9)
+
+    visited.add(row * 9 + col)
+  } while (puzzle[row][col].value === solution[row][col])
+
+  dispatch(fillBox({ row, col, value: solution[row][col] }))
+}
 
 export default sudokuSlice.reducer
