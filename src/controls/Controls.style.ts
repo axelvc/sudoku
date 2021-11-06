@@ -11,33 +11,6 @@ export const Section = styled.section`
   margin: 0 1.5rem 1.5rem;
 `
 
-interface ControlGridProps {
-  rows: number
-  cols: number
-}
-
-export const ControlsGrid = styled.div<ControlGridProps>`
-  display: grid;
-  grid-template: ${p => `repeat(${p.rows}, 1fr) / repeat(${p.cols}, 1fr) `};
-  gap: 0.25rem;
-
-  & > *:first-child {
-    border-top-left-radius: 0.5rem;
-  }
-
-  & > *:last-child {
-    border-bottom-right-radius: 0.5rem;
-  }
-
-  & > *:nth-child(${p => p.cols}) {
-    border-top-right-radius: 0.5rem;
-  }
-
-  & > *:nth-last-child(${p => p.cols}) {
-    border-bottom-left-radius: 0.5rem;
-  }
-`
-
 const numpadColors = css`
   /* stylelint-ignore */
   --color: var(--color-green-400);

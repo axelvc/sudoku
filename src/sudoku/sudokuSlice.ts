@@ -136,7 +136,7 @@ const sudokuSlice = createSlice({
 
 export const { setSudoku, fillBox, validateSudoku, undo, reset } = sudokuSlice.actions
 
-export const HelpFill = (): AppThunk => (dispatch, getState) => {
+export const helpFill = (): AppThunk => (dispatch, getState) => {
   const { puzzle, solution } = getState().sudoku
   const total = puzzle.length ** 2
   const visited = new Set<number>()

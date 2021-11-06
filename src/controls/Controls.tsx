@@ -1,15 +1,16 @@
 import { FC } from 'react'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { setFillValue, setMarksEnabled } from './controlsSlice'
-import { HelpFill, reset, undo, validateSudoku } from '../sudoku/sudokuSlice'
+import { helpFill, reset, undo, validateSudoku } from '../sudoku/sudokuSlice'
 
-import { ControlButton, ControlsGrid, ControlSwitch, Section } from './Controls.style'
+import Grid from '../common/Grid'
 import Pencil from '../common/svg/Pencil.svg'
 import Eraser from '../common/svg/Eraser.svg'
 import Bulb from '../common/svg/Bulb.svg'
 import Check from '../common/svg/Check.svg'
 import Undo from '../common/svg/Undo.svg'
 import Reset from '../common/svg/Reset.svg'
+import { ControlButton, ControlSwitch, Section } from './Controls.style'
 
 const NUMPAD_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
@@ -26,7 +27,7 @@ const Controls: FC = () => {
 
   return (
     <Section>
-      <ControlsGrid cols={2} rows={3}>
+      <Grid cols={2} rows={3}>
         <ControlSwitch
           title="marks"
           pressed={marksEnabled}
@@ -41,7 +42,7 @@ const Controls: FC = () => {
         >
           <Eraser />
         </ControlSwitch>
-        <ControlButton title="help" onClick={() => dispatch(HelpFill())}>
+        <ControlButton title="help" onClick={() => dispatch(helpFill())}>
           <Bulb />
         </ControlButton>
         <ControlButton title="validate" onClick={() => dispatch(validateSudoku())}>
@@ -53,9 +54,9 @@ const Controls: FC = () => {
         <ControlButton title="reset" onClick={() => dispatch(reset())}>
           <Reset />
         </ControlButton>
-      </ControlsGrid>
+      </Grid>
 
-      <ControlsGrid cols={3} rows={3}>
+      <Grid cols={3} rows={3}>
         {NUMPAD_NUMBERS.map(n => (
           <ControlSwitch
             numpad
@@ -67,7 +68,7 @@ const Controls: FC = () => {
             {n}
           </ControlSwitch>
         ))}
-      </ControlsGrid>
+      </Grid>
     </Section>
   )
 }

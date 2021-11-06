@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector, useAppStore } from '../store/hooks'
 import { difficulties, fetchSudoku } from './sudokuService'
@@ -41,7 +40,7 @@ const Sudoku: FC = () => {
         />
       </Header>
 
-      <SudokuGrid>
+      <SudokuGrid rows={9} cols={9}>
         {puzzle.map((arr, row) =>
           arr.map((box, col) => (
             <Box

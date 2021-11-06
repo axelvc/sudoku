@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import Grid from '../common/Grid'
 
 export const Header = styled.header`
   display: flex;
@@ -6,13 +7,8 @@ export const Header = styled.header`
   margin: 0.75rem;
 `
 
-export const SudokuGrid = styled.div`
-  display: grid;
-  grid-template: repeat(9, 1fr) / repeat(9, 1fr);
-  gap: 0.25rem;
+export const SudokuGrid = styled(Grid)`
   margin: 0.5rem;
-  overflow: hidden;
-  border-radius: 0.5rem;
 `
 
 interface BoxProps {
