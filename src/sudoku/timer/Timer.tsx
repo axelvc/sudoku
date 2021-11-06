@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react'
 
-import Button from '../common/Button'
-import Play from '../common/svg/Play.svg'
-import Pause from '../common/svg/Pause.svg'
-import { TimerIconContainer } from './Sudoku.style'
+import Button from '../../common/Button'
+import Play from '../../common/svg/Play.svg'
+import Pause from '../../common/svg/Pause.svg'
+import { IconContainer } from './Timer.style'
 
 const SECOND_IN_MILLISECONDS = 1_000
 const MINUTE_IN_SECONDS = 60
@@ -29,7 +29,7 @@ const Timer: FC = () => {
 
   return (
     <Button role="timer" onClick={() => setRunning(!running)}>
-      <TimerIconContainer>{running ? <Pause /> : <Play />}</TimerIconContainer>
+      <IconContainer>{running ? <Pause /> : <Play />}</IconContainer>
       {padTime(mins)}:{padTime(secs)}
     </Button>
   )

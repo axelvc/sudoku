@@ -1,4 +1,4 @@
-import { render, screen, userEvent, act } from '../test/utils'
+import { render, screen, userEvent, act } from '../../test/utils'
 
 import Timer from './Timer'
 

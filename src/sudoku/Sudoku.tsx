@@ -5,7 +5,7 @@ import { difficulties, fetchSudoku } from './sudokuService'
 import { fillBox, setSudoku, Coords } from './sudokuSlice'
 
 import DropDown from '../common/DropDown/DropDown'
-import Timer from './Timer'
+import Timer from './timer/Timer'
 import { Box, Header, Mark, SudokuGrid } from './Sudoku.style'
 
 const Sudoku: FC = () => {
