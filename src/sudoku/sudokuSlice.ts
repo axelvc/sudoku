@@ -76,9 +76,23 @@ const sudokuSlice = createSlice({
         checkCollisions(state, { row, col }, oldValue)
       }
     },
+    validateSudoku(state) {
+      const { puzzle, solution } = state
+
+      puzzle.forEach((row, rI) =>
+        row.forEach((box, cI) => {
+          const { value, errors } = box
+          const rightValue = solution[rI][cI]
+
+          if (value && !errors && value !== rightValue) {
+            box.errors++
+          }
+        }),
+      )
+    },
   },
 })
 
-export const { setSudoku, fillBox } = sudokuSlice.actions
+export const { setSudoku, fillBox, validateSudoku } = sudokuSlice.actions
 
 export default sudokuSlice.reducer
