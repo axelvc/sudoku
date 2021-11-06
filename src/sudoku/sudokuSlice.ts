@@ -20,9 +20,12 @@ export interface BoxData {
   blocked: boolean
 }
 
+interface HistoryData extends Coords, BoxData {}
+
 export interface SudokuState {
   solution: Sudoku
   puzzle: BoxData[][]
+  history: HistoryData[]
 }
 
 function parsePuzzle(puzzle: Sudoku): BoxData[][] {
@@ -36,9 +39,16 @@ function parsePuzzle(puzzle: Sudoku): BoxData[][] {
   )
 }
 
+function saveHistory(state: SudokuState, data: HistoryData): void {
+  data.marks = data.marks.slice()
+
+  state.history.push(data)
+}
+
 const initialState: SudokuState = {
   solution: Array(9).fill(Array(9).fill(0)),
   puzzle: parsePuzzle(Array(9).fill(Array(9).fill(0))),
+  history: [],
 }
 
 const sudokuSlice = createSlice({
@@ -54,6 +64,8 @@ const sudokuSlice = createSlice({
       const oldValue = box.value
 
       if (box.blocked) return
+
+      saveHistory(state, { ...box, row, col })
 
       if (value === 0) {
         box.value = 0
@@ -91,10 +103,38 @@ const sudokuSlice = createSlice({
         }),
       )
     },
+    undo(state) {
+      const last = state.history.pop()
+
+      if (!last) return
+
+      const { row, col, ...boxData } = last
+      const { value: oldValue, errors } = state.puzzle[row][col]
+
+      state.puzzle[row][col] = {
+        ...boxData,
+        errors, // set actual errors to remove posible actual collisions
+      }
+
+      checkCollisions(state, { row, col }, oldValue)
+    },
+    reset(state) {
+      state.history = []
+      state.puzzle.forEach(row =>
+        row.forEach(box => {
+          box.errors = 0
+
+          if (!box.blocked) {
+            box.value = 0
+            box.marks = []
+          }
+        }),
+      )
+    },
   },
 })
 
-export const { setSudoku, fillBox, validateSudoku } = sudokuSlice.actions
+export const { setSudoku, fillBox, validateSudoku, undo, reset } = sudokuSlice.actions
 
 export const HelpFill = (): AppThunk => (dispatch, getState) => {
   const { puzzle, solution } = getState().sudoku

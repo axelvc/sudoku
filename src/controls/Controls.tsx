@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { setFillValue, setMarksEnabled } from './controlsSlice'
-import { HelpFill, validateSudoku } from '../sudoku/sudokuSlice'
+import { HelpFill, reset, undo, validateSudoku } from '../sudoku/sudokuSlice'
 
 import { ControlButton, ControlsGrid, ControlSwitch, Section } from './Controls.style'
 import Pencil from '../common/svg/Pencil.svg'
@@ -47,11 +47,10 @@ const Controls: FC = () => {
         <ControlButton title="validate" onClick={() => dispatch(validateSudoku())}>
           <Check />
         </ControlButton>
-        {/* TODO: add actions to these buttons */}
-        <ControlButton title="undo">
+        <ControlButton title="undo" onClick={() => dispatch(undo())}>
           <Undo />
         </ControlButton>
-        <ControlButton title="reset">
+        <ControlButton title="reset" onClick={() => dispatch(reset())}>
           <Reset />
         </ControlButton>
       </ControlsGrid>
