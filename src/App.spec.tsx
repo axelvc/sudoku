@@ -52,5 +52,46 @@ describe('integration between controls and sudoku', () => {
 
       expect($box).toHaveTextContent('')
     })
+
+    it('should add error styles on click "validate" control', () => {
+      const $validate = screen.getByRole('button', { name: regex('validate') })
+      const $box = screen.getByTestId('box-0-0')
+      const $numpad1 = screen.getByTestId('numpad-1')
+
+      userEvent.click($numpad1)
+      userEvent.click($box)
+      userEvent.click($validate)
+
+      expect($box).toHaveStyleRule('--color', 'var(--color-red-500)')
+      expect($box).toHaveStyleRule('--background', 'var(--color-red-100)')
+      expect($box).toMatchSnapshot()
+    })
+
+    it('should restore value on click "undo" control after set value', () => {
+      const $undo = screen.getByRole('button', { name: regex('undo') })
+      const $box = screen.getByTestId('box-0-0')
+      const $numpad1 = screen.getByTestId('numpad-1')
+
+      userEvent.click($numpad1)
+      userEvent.click($box)
+      userEvent.click($undo)
+
+      expect($box).toHaveTextContent('')
+    })
+
+    it('should restore all changed values on click "reset" control', () => {
+      const $reset = screen.getByRole('button', { name: regex('reset') })
+      const $box1 = screen.getByTestId('box-0-0')
+      const $box2 = screen.getByTestId('box-0-1')
+      const $numpad1 = screen.getByTestId('numpad-1')
+
+      userEvent.click($numpad1)
+      userEvent.click($box1)
+      userEvent.click($box2)
+
+      userEvent.click($reset)
+      expect($box1).toHaveTextContent('')
+      expect($box2).toHaveTextContent('')
+    })
   })
 })
