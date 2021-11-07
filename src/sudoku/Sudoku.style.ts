@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import Button from '../common/Button'
 import Grid from '../common/Grid'
 
 export const Header = styled.header`
@@ -12,25 +13,62 @@ export const SudokuGrid = styled(Grid)`
 `
 
 interface BoxProps {
+  blockIndex: number
   hasMarks: boolean
   error: boolean
 }
 
-export const Box = styled.button<BoxProps>`
+export const Box = styled(Button)<BoxProps>`
   position: relative;
   aspect-ratio: 1;
   display: grid;
   place-items: center;
   font-weight: 700;
-  color: var(--color-fg);
-  background: var(--color-gray-200);
   border-radius: 0.2rem;
+
+  &:disabled {
+    /* stylelint-disable declaration-colon-newline-after */
+    background-image: linear-gradient(
+      -45deg,
+      var(--background) 15%,
+      var(--disabled-line) 15% 25%,
+      var(--background) 25% 35%,
+      var(--disabled-line) 35% 45%,
+      var(--background) 45% 55%,
+      var(--disabled-line) 55% 65%,
+      var(--background) 65% 75%,
+      var(--disabled-line) 75% 85%,
+      var(--background) 85%
+    );
+  }
+
+  --color: var(--color-gray-900);
+  --color-active: var(--color-gray-900);
+  --background: var(--color-gray-200);
+  --background-hover: var(--color-gray-300);
+  --background-active: var(--color-gray-400);
+  --disabled-line: var(--color-gray-300);
+
+  ${({ blockIndex }) =>
+    Boolean(blockIndex % 2) &&
+    css`
+      /* stylelint-ignore */
+      --background: var(--color-gray-300);
+      --background-hover: var(--color-gray-400);
+      --background-active: var(--color-gray-500);
+      --disabled-line: var(--color-gray-500);
+    `}
 
   ${({ error }) =>
     error &&
     css`
-      color: var(--color-red-500);
-      background: var(--color-red-100);
+      /* stylelint-ignore */
+      --color: var(--color-red-500);
+      --background: var(--color-red-100);
+      --background-hover: var(--color-red-300);
+      --color-active: var(--color-gray-100);
+      --background-active: var(--color-red-500);
+      --disabled-line: var(--color-red-300);
     `}
 
   ${({ hasMarks }) =>

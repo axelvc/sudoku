@@ -15,7 +15,7 @@ export default styled.button`
   border-radius: 0.5rem;
   outline-color: var(--color);
   transition: 100ms ease-out;
-  transition-property: background color;
+  transition-property: background, color;
 
   &:hover,
   &:focus-visible {

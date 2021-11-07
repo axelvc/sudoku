@@ -46,6 +46,7 @@ const Sudoku: FC = () => {
             <Box
               key={`${row}${col}`}
               data-testid={`box-${row}-${col}`}
+              blockIndex={Math.floor(row / 3) * 3 + Math.floor(col / 3)}
               hasMarks={box.marks.length >= 1}
               error={box.errors > 0}
               disabled={box.blocked}
