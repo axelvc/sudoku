@@ -12,18 +12,17 @@ export const Section = styled.section`
 `
 
 const numpadColors = css`
-  /* stylelint-ignore */
-  --color: var(--color-green-400);
-  --background: var(--color-green-100);
-  --background-hover: var(--color-green-200);
-  --background-active: var(--color-green-400);
-
   &[aria-pressed='true'] {
     --color: var(--color-gray-100);
     --background: var(--color-green-400);
     --background-hover: var(--color-green-500);
     --background-active: var(--color-green-600);
   }
+
+  --color: var(--color-green-400);
+  --background: var(--color-green-100);
+  --background-hover: var(--color-green-200);
+  --background-active: var(--color-green-400);
 `
 
 interface ControlProps {

@@ -48,6 +48,7 @@
     "pre-commit": "^1.2.2",
     "regenerator-runtime": "^0.13.9",
     "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recess-order": "^2.5.0",
     "stylelint-config-standard": "^22.0.0",
     "stylelint-order": "^4.1.0",

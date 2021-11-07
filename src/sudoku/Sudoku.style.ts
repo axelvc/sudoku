@@ -27,7 +27,6 @@ export const Box = styled(Button)<BoxProps>`
   border-radius: 0.2rem;
 
   &:disabled {
-    /* stylelint-disable declaration-colon-newline-after */
     background-image: linear-gradient(
       -45deg,
       var(--background) 15%,
