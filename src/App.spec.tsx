@@ -37,6 +37,16 @@ describe('integration between controls and sudoku', () => {
 
       expect($box).toHaveTextContent(numpadNumbers.join(''))
     })
+
+    it('should add selected styles on click', () => {
+      const $box = screen.getByTestId('box-0-0')
+      const $control = screen.getByTestId('numpad-1')
+
+      userEvent.click($control)
+      userEvent.click($box)
+
+      expect($box).toMatchSnapshot()
+    })
   })
 
   describe('utils controls', () => {

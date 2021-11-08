@@ -15,6 +15,7 @@ export const SudokuGrid = styled(Grid)`
 interface BoxProps {
   blockIndex: number
   hasMarks: boolean
+  selected: boolean
   error: boolean
 }
 
@@ -56,6 +57,18 @@ export const Box = styled(Button)<BoxProps>`
       --background-hover: var(--color-gray-400);
       --background-active: var(--color-gray-500);
       --disabled-line: var(--color-gray-500);
+    `}
+
+  ${({ selected }) =>
+    selected &&
+    css`
+      /* stylelint-ignore */
+      --color: var(--color-green-400);
+      --background: var(--color-green-100);
+      --background-hover: var(--color-green-200);
+      --color-active: var(--color-gray-100);
+      --background-active: var(--color-green-400);
+      --disabled-line: var(--color-green-200);
     `}
 
   ${({ error }) =>

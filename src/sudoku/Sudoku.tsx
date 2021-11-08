@@ -10,6 +10,7 @@ import { Box, Header, Mark, SudokuGrid } from './Sudoku.style'
 const Sudoku: FC = () => {
   const [difficulty, setDifficulty] = useState('easy')
   const puzzle = useAppSelector(state => state.sudoku.puzzle)
+  const fillValue = useAppSelector(state => state.controls.fillValue)
   const dispatch = useAppDispatch()
   const store = useAppStore()
 
@@ -22,11 +23,11 @@ const Sudoku: FC = () => {
   }, [difficulty])
 
   function fillBoxWithControlValue(coords: Coords): void {
-    const { fillValue: value, marksEnabled } = store.getState().controls
+    const { marksEnabled } = store.getState().controls
 
-    if (value === null) return
+    if (fillValue === null) return
 
-    dispatch(fillBox({ ...coords, value, isMark: marksEnabled }))
+    dispatch(fillBox({ ...coords, value: fillValue, isMark: marksEnabled }))
   }
 
   return (
@@ -48,6 +49,7 @@ const Sudoku: FC = () => {
               data-testid={`box-${row}-${col}`}
               blockIndex={Math.floor(row / 3) * 3 + Math.floor(col / 3)}
               hasMarks={box.marks.length >= 1}
+              selected={Boolean(fillValue) && fillValue === box.value}
               error={box.errors > 0}
               disabled={box.blocked}
               onClick={() => fillBoxWithControlValue({ row, col })}
