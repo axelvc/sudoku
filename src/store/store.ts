@@ -1,13 +1,9 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 
-import controlsSlice from '../controls/controlsSlice'
 import sudokuSlice from '../sudoku/sudokuSlice'
 
 const store = configureStore({
-  reducer: {
-    controls: controlsSlice,
-    sudoku: sudokuSlice,
-  },
+  reducer: sudokuSlice,
 })
 
 export default store

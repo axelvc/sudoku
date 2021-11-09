@@ -10,7 +10,6 @@ export interface Coords {
 
 export interface FillData extends Coords {
   value: number
-  isMark?: boolean
 }
 
 export interface BoxData {
@@ -26,6 +25,8 @@ export interface SudokuState {
   solution: Sudoku
   puzzle: BoxData[][]
   history: HistoryData[]
+  numpadValue: number | null
+  marksEnabled: boolean
 }
 
 function parsePuzzle(puzzle: Sudoku): BoxData[][] {
@@ -49,17 +50,27 @@ const initialState: SudokuState = {
   solution: Array(9).fill(Array(9).fill(0)),
   puzzle: parsePuzzle(Array(9).fill(Array(9).fill(0))),
   history: [],
+  numpadValue: null,
+  marksEnabled: false,
 }
 
 const sudokuSlice = createSlice({
   name: 'sudoku',
   initialState,
   reducers: {
+    setMarksEnabled(state, { payload }: PayloadAction<boolean>) {
+      state.marksEnabled = payload
+    },
+    updateNumpadValue(state, { payload }: PayloadAction<number>) {
+      const newValue = state.numpadValue === payload ? null : payload
+
+      state.numpadValue = newValue
+    },
     setSudoku(state, { payload: { puzzle, solution } }: PayloadAction<ResponseType>) {
       state.solution = solution
       state.puzzle = parsePuzzle(puzzle)
     },
-    fillBox(state, { payload: { row, col, value, isMark } }: PayloadAction<FillData>) {
+    fillBox(state, { payload: { row, col, value } }: PayloadAction<FillData>) {
       const box = state.puzzle[row][col]
       const oldValue = box.value
 
@@ -70,7 +81,7 @@ const sudokuSlice = createSlice({
       if (value === 0) {
         box.value = 0
         box.marks = []
-      } else if (isMark) {
+      } else if (state.marksEnabled) {
         const index = box.marks.indexOf(value)
 
         if (index === -1) {
@@ -89,7 +100,7 @@ const sudokuSlice = createSlice({
         checkCollisions(state, { row, col }, oldValue)
       }
     },
-    validateSudoku(state) {
+    validate(state) {
       const { puzzle, solution } = state
 
       puzzle.forEach((row, rI) =>
@@ -134,10 +145,28 @@ const sudokuSlice = createSlice({
   },
 })
 
-export const { setSudoku, fillBox, validateSudoku, undo, reset } = sudokuSlice.actions
+export const {
+  setMarksEnabled,
+  updateNumpadValue,
+  setSudoku,
+  fillBox,
+  validate,
+  undo,
+  reset,
+} = sudokuSlice.actions
+
+export const fillBoxwithNumpadValue =
+  (coords: Coords): AppThunk =>
+  (dispatch, getState) => {
+    const { numpadValue } = getState()
+
+    if (numpadValue === null) return
+
+    dispatch(fillBox({ ...coords, value: numpadValue }))
+  }
 
 export const helpFill = (): AppThunk => (dispatch, getState) => {
-  const { puzzle, solution } = getState().sudoku
+  const { puzzle, solution } = getState()
   const total = puzzle.length ** 2
   const visited = new Set<number>()
   let row: number

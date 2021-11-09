@@ -1,4 +1,4 @@
-import { regex, render, screen, userEvent } from '../test/utils'
+import { regex, render, screen, userEvent } from '../../test/utils'
 import Controls from './Controls'
 
 beforeEach(() => render(<Controls />))

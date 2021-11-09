@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import Button from '../common/Button'
 import Grid from '../common/Grid'
 
-export const Header = styled.header`
+export const SudokuHeader = styled.header`
   display: flex;
   justify-content: space-between;
   margin: 0.75rem;

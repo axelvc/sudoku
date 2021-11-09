@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
-import Button from '../common/Button'
-import Switch from '../common/Switch'
+import Button from '../../common/Button'
+import Switch from '../../common/Switch'
 
 export const Section = styled.section`
   display: grid;
@@ -11,7 +11,27 @@ export const Section = styled.section`
   margin: 0 1.5rem 1.5rem;
 `
 
-const numpadColors = css`
+const controlStyles = css`
+  aspect-ratio: 1;
+  font-size: 1.5rem;
+  border-radius: 0.125rem;
+`
+
+export const ControlButton = styled(Button)`
+  ${controlStyles}
+`
+
+export const ControlSwitch = styled(Switch)`
+  ${controlStyles}
+`
+
+interface ControlSwitchProps {
+  numpad?: boolean
+}
+
+export const NumpadSwitch = styled(Switch)<ControlSwitchProps>`
+  ${controlStyles}
+
   &[aria-pressed='true'] {
     --color: var(--color-gray-100);
     --background: var(--color-green-400);
@@ -23,23 +43,4 @@ const numpadColors = css`
   --background: var(--color-green-100);
   --background-hover: var(--color-green-200);
   --background-active: var(--color-green-400);
-`
-
-interface ControlProps {
-  numpad?: boolean
-}
-
-const controlStyles = css<ControlProps>`
-  ${({ numpad }) => numpad && numpadColors}
-
-  aspect-ratio: 1;
-  font-size: 1.5rem;
-  border-radius: 0.125rem;
-`
-
-export const ControlButton = styled(Button)<ControlProps>`
-  ${controlStyles}
-`
-export const ControlSwitch = styled(Switch)<ControlProps>`
-  ${controlStyles}
 `

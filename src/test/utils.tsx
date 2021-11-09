@@ -5,7 +5,6 @@ import userEvent from '@testing-library/user-event'
 import { FC, ReactElement } from 'react'
 import { Provider } from 'react-redux'
 
-import controlsSlice from '../controls/controlsSlice'
 import sudokuSlice from '../sudoku/sudokuSlice'
 import { RootStore } from '../store/store'
 
@@ -14,10 +13,7 @@ export function render(
   options?: Omit<RenderOptions, 'wrapper'>,
 ): RenderResult & { store: RootStore } {
   const store = configureStore({
-    reducer: {
-      controls: controlsSlice,
-      sudoku: sudokuSlice,
-    },
+    reducer: sudokuSlice,
   })
 
   const Wrapper: FC = ({ children }) => <Provider store={store}>{children}</Provider>
