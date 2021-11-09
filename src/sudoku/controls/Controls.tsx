@@ -6,7 +6,7 @@ import {
   undo,
   validate,
   setMarksEnabled,
-  updateNumpadValue,
+  UpdateNumpadValueOrFillBox,
 } from '../sudokuSlice'
 
 import Grid from '../../common/Grid'
@@ -38,7 +38,7 @@ const Controls: FC = () => {
         <ControlSwitch
           title="erase"
           pressed={numpadValue === 0}
-          onClick={() => dispatch(updateNumpadValue(0))}
+          onClick={() => dispatch(UpdateNumpadValueOrFillBox(0))}
         >
           <Eraser />
         </ControlSwitch>
@@ -62,7 +62,7 @@ const Controls: FC = () => {
             key={n}
             data-testid={`numpad-${n}`}
             pressed={numpadValue === n}
-            onClick={() => dispatch(updateNumpadValue(n))}
+            onClick={() => dispatch(UpdateNumpadValueOrFillBox(n))}
           >
             {n}
           </NumpadSwitch>

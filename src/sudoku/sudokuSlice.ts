@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { shallowEqual } from 'react-redux'
 import { AppThunk } from '../store/store'
 import { Sudoku, ResponseType } from './sudokuService'
 import checkCollisions from './utils/checkCollisions'
@@ -25,8 +26,9 @@ export interface SudokuState {
   solution: Sudoku
   puzzle: BoxData[][]
   history: HistoryData[]
-  numpadValue: number | null
   marksEnabled: boolean
+  numpadValue: number | null
+  selectedBox: Coords | null
 }
 
 function parsePuzzle(puzzle: Sudoku): BoxData[][] {
@@ -52,6 +54,7 @@ const initialState: SudokuState = {
   history: [],
   numpadValue: null,
   marksEnabled: false,
+  selectedBox: null,
 }
 
 const sudokuSlice = createSlice({
@@ -65,6 +68,13 @@ const sudokuSlice = createSlice({
       const newValue = state.numpadValue === payload ? null : payload
 
       state.numpadValue = newValue
+    },
+    updateSelectedBox(state, { payload }: PayloadAction<Coords>) {
+      if (shallowEqual(state.selectedBox, payload)) {
+        state.selectedBox = null
+      } else {
+        state.selectedBox = payload
+      }
     },
     setSudoku(state, { payload: { puzzle, solution } }: PayloadAction<ResponseType>) {
       state.solution = solution
@@ -148,6 +158,7 @@ const sudokuSlice = createSlice({
 export const {
   setMarksEnabled,
   updateNumpadValue,
+  updateSelectedBox,
   setSudoku,
   fillBox,
   validate,
@@ -155,14 +166,28 @@ export const {
   reset,
 } = sudokuSlice.actions
 
-export const fillBoxwithNumpadValue =
+export const updateSelectedboxOrFillBox =
   (coords: Coords): AppThunk =>
   (dispatch, getState) => {
     const { numpadValue } = getState()
 
-    if (numpadValue === null) return
+    if (typeof numpadValue === 'number') {
+      dispatch(fillBox({ ...coords, value: numpadValue }))
+    } else {
+      dispatch(updateSelectedBox(coords))
+    }
+  }
 
-    dispatch(fillBox({ ...coords, value: numpadValue }))
+export const UpdateNumpadValueOrFillBox =
+  (value: number): AppThunk =>
+  (dispatch, getState) => {
+    const { selectedBox } = getState()
+
+    if (selectedBox) {
+      dispatch(fillBox({ ...selectedBox, value }))
+    } else {
+      dispatch(updateNumpadValue(value))
+    }
   }
 
 export const helpFill = (): AppThunk => (dispatch, getState) => {

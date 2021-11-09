@@ -1,17 +1,19 @@
 import { FC, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { difficulties, fetchSudoku } from './sudokuService'
-import { fillBoxwithNumpadValue, setSudoku } from './sudokuSlice'
+import { setSudoku, updateSelectedboxOrFillBox } from './sudokuSlice'
 
 import Controls from './controls/Controls'
 import DropDown from '../common/DropDown/DropDown'
 import Timer from './timer/Timer'
 import { Box, SudokuHeader, Mark, SudokuGrid } from './Sudoku.style'
+import { shallowEqual } from 'react-redux'
 
 const Sudoku: FC = () => {
   const [difficulty, setDifficulty] = useState('easy')
   const puzzle = useAppSelector(state => state.puzzle)
   const numpadValue = useAppSelector(state => state.numpadValue)
+  const selectedBox = useAppSelector(state => state.selectedBox)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -42,10 +44,13 @@ const Sudoku: FC = () => {
                 data-testid={`box-${row}-${col}`}
                 blockIndex={Math.floor(row / 3) * 3 + Math.floor(col / 3)}
                 hasMarks={box.marks.length >= 1}
-                selected={Boolean(numpadValue) && numpadValue === box.value}
+                pressed={Boolean(
+                  (numpadValue && numpadValue === box.value) ??
+                    (selectedBox && shallowEqual(selectedBox, { row, col })),
+                )}
                 error={box.errors > 0}
                 disabled={box.blocked}
-                onClick={() => dispatch(fillBoxwithNumpadValue({ row, col }))}
+                onClick={() => dispatch(updateSelectedboxOrFillBox({ row, col }))}
               >
                 {box.value ? (
                   <span>{box.value}</span>

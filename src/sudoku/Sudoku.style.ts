@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import Button from '../common/Button'
+import Switch from '../common/Switch'
 import Grid from '../common/Grid'
 
 export const SudokuHeader = styled.header`
@@ -15,17 +15,23 @@ export const SudokuGrid = styled(Grid)`
 interface BoxProps {
   blockIndex: number
   hasMarks: boolean
-  selected: boolean
   error: boolean
 }
 
-export const Box = styled(Button)<BoxProps>`
+export const Box = styled(Switch)<BoxProps>`
   position: relative;
   aspect-ratio: 1;
   display: grid;
   place-items: center;
   font-weight: 700;
   border-radius: 0.2rem;
+
+  --color: var(--color-gray-900);
+  --color-active: var(--color-gray-900);
+  --background: var(--color-gray-200);
+  --background-hover: var(--color-gray-300);
+  --background-active: var(--color-gray-400);
+  --disabled-line: var(--color-gray-300);
 
   &:disabled {
     background-image: linear-gradient(
@@ -42,12 +48,14 @@ export const Box = styled(Button)<BoxProps>`
     );
   }
 
-  --color: var(--color-gray-900);
-  --color-active: var(--color-gray-900);
-  --background: var(--color-gray-200);
-  --background-hover: var(--color-gray-300);
-  --background-active: var(--color-gray-400);
-  --disabled-line: var(--color-gray-300);
+  &[aria-pressed='true'] {
+    --color: var(--color-green-400);
+    --background: var(--color-green-100);
+    --background-hover: var(--color-green-200);
+    --color-active: var(--color-gray-100);
+    --background-active: var(--color-green-400);
+    --disabled-line: var(--color-green-200);
+  }
 
   ${({ blockIndex }) =>
     Boolean(blockIndex % 2) &&
@@ -57,18 +65,6 @@ export const Box = styled(Button)<BoxProps>`
       --background-hover: var(--color-gray-400);
       --background-active: var(--color-gray-500);
       --disabled-line: var(--color-gray-500);
-    `}
-
-  ${({ selected }) =>
-    selected &&
-    css`
-      /* stylelint-ignore */
-      --color: var(--color-green-400);
-      --background: var(--color-green-100);
-      --background-hover: var(--color-green-200);
-      --color-active: var(--color-gray-100);
-      --background-active: var(--color-green-400);
-      --disabled-line: var(--color-green-200);
     `}
 
   ${({ error }) =>
