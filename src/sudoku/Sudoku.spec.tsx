@@ -35,36 +35,69 @@ describe('Sudoku component', () => {
     describe('numpad', () => {
       const numpadNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(String)
 
-      it('should fill box value', () => {
-        const $box = screen.getByTestId('box-0-0')
+      describe('fill box', () => {
+        it('should fill by select the numpad first', () => {
+          const $box = screen.getByTestId('box-0-0')
 
-        numpadNumbers.forEach(n => {
-          const $control = screen.getByTestId(`numpad-${n}`)
+          numpadNumbers.forEach(n => {
+            const $control = screen.getByTestId(`numpad-${n}`)
 
-          userEvent.click($control)
+            userEvent.click($control)
+            userEvent.click($box)
+
+            expect($box).toHaveTextContent(n)
+          })
+        })
+
+        it('should fill by select the box first', () => {
+          const $box = screen.getByTestId('box-0-0')
+
           userEvent.click($box)
 
-          expect($box).toHaveTextContent(n)
+          numpadNumbers.forEach(n => {
+            const $control = screen.getByTestId(`numpad-${n}`)
+
+            userEvent.click($control)
+            expect($box).toHaveTextContent(n)
+          })
         })
       })
 
-      it('should add mark value', () => {
-        const $box = screen.getByTestId('box-0-0')
-        const $marks = screen.getByRole('button', { name: regex('marks') })
+      describe('add pencil-marks', () => {
+        it('should add by select the numpad first', () => {
+          const $box = screen.getByTestId('box-0-0')
+          const $marks = screen.getByRole('button', { name: regex('marks') })
 
-        userEvent.click($marks)
+          userEvent.click($marks)
 
-        numpadNumbers.forEach(n => {
-          const $control = screen.getByTestId(`numpad-${n}`)
+          numpadNumbers.forEach(n => {
+            const $control = screen.getByTestId(`numpad-${n}`)
 
-          userEvent.click($control)
-          userEvent.click($box)
+            userEvent.click($control)
+            userEvent.click($box)
+          })
+
+          expect($box).toHaveTextContent(numpadNumbers.join(''))
         })
 
-        expect($box).toHaveTextContent(numpadNumbers.join(''))
+        it('should add by select the box first', () => {
+          const $box = screen.getByTestId('box-0-0')
+          const $marks = screen.getByRole('button', { name: regex('marks') })
+
+          userEvent.click($marks)
+          userEvent.click($box)
+
+          numpadNumbers.forEach(n => {
+            const $control = screen.getByTestId(`numpad-${n}`)
+
+            userEvent.click($control)
+          })
+
+          expect($box).toHaveTextContent(numpadNumbers.join(''))
+        })
       })
 
-      it('should add selected styles on click', () => {
+      it('should add selected styles to box with same value as selected numpad', () => {
         const $box = screen.getByTestId('box-0-0')
         const $control = screen.getByTestId('numpad-1')
 
