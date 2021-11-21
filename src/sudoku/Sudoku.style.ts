@@ -12,6 +12,12 @@ export const SudokuGrid = styled(Grid)`
   margin: 0.5rem;
 `
 
+export const SuccessDifficulty = styled.p`
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+  text-transform: capitalize;
+`
+
 interface BoxProps {
   isLoading: boolean
   blockIndex: number

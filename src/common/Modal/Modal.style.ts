@@ -19,6 +19,7 @@ export const StyledModal = styled.section`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  width: fill-available;
   max-width: 26rem;
   padding: 2rem;
   margin: 1.5rem;

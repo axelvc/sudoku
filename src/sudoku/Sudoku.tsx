@@ -8,13 +8,14 @@ import DropDown from '../common/DropDown/DropDown'
 import Modal from '../common/Modal/Modal'
 import Controls from './controls/Controls'
 import Timer from './timer/Timer'
-import { Box, SudokuHeader, Mark, SudokuGrid } from './Sudoku.style'
+import { Box, SudokuHeader, Mark, SudokuGrid, SuccessDifficulty } from './Sudoku.style'
 import { shallowEqual } from 'react-redux'
 
 const Sudoku: FC = () => {
   const [difficulty, setDifficulty] = useState('easy')
   const [error, setError] = useState(false)
   const loading = useAppSelector(state => state.loading)
+  const completed = useAppSelector(state => state.completed)
   const puzzle = useAppSelector(state => state.puzzle)
   const numpadValue = useAppSelector(state => state.numpadValue)
   const selectedBox = useAppSelector(state => state.selectedBox)
@@ -45,8 +46,22 @@ const Sudoku: FC = () => {
         </Modal>
       )}
 
+      {completed && (
+        <Modal title="Great job!">
+          <div>
+            {/* TODO: get real time */}
+            <p>Time: 00:00</p>
+            <SuccessDifficulty>Difficulty: {difficulty}</SuccessDifficulty>
+          </div>
+          <Button size="large" onClick={newSudoku}>
+            Let's do again
+          </Button>
+        </Modal>
+      )}
+
       <section>
         <SudokuHeader>
+          {/* TODO: start timer when get a sudoku */}
           <Timer />
           <DropDown
             options={difficulties}

@@ -24,6 +24,7 @@ interface HistoryData extends Coords, BoxData {}
 
 export interface SudokuState {
   loading: boolean
+  completed: boolean
   solution: Sudoku
   puzzle: BoxData[][]
   history: HistoryData[]
@@ -49,8 +50,32 @@ function saveHistory(state: SudokuState, data: HistoryData): void {
   state.history.push(data)
 }
 
+function updateMarks(box: BoxData, value: number): void {
+  const index = box.marks.indexOf(value)
+
+  if (index === -1) {
+    box.marks.push(value)
+  } else {
+    box.marks.splice(index, 1)
+  }
+
+  box.value = 0
+}
+
+function updateValue(box: BoxData, value: number): void {
+  box.value = box.value === value ? 0 : value
+  box.marks = []
+}
+
+function updateCompleted(state: SudokuState): void {
+  state.completed = state.solution.every((row, ri) =>
+    row.every((value, ci) => value === state.puzzle[ri][ci].value),
+  )
+}
+
 const initialState: SudokuState = {
   loading: false,
+  completed: false,
   solution: Array(9).fill(Array(9).fill(0)),
   puzzle: parsePuzzle(Array(9).fill(Array(9).fill(0))),
   history: [],
@@ -104,21 +129,13 @@ const sudokuSlice = createSlice({
         box.value = 0
         box.marks = []
       } else if (state.marksEnabled) {
-        const index = box.marks.indexOf(value)
-
-        if (index === -1) {
-          box.marks.push(value)
-        } else {
-          box.marks.splice(index, 1)
-        }
-
-        box.value = 0
+        updateMarks(box, value)
       } else {
-        box.value = box.value === value ? 0 : value
-        box.marks = []
+        updateValue(box, value)
+        updateCompleted(state)
       }
 
-      if (oldValue !== box.value) {
+      if (oldValue !== box.value && !state.completed) {
         checkCollisions(state, { row, col }, oldValue)
       }
     },
