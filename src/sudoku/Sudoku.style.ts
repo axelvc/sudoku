@@ -54,6 +54,7 @@ export const Box = styled(Switch)<BoxProps>`
         `
       : css`
           &:disabled {
+            color: var(--color-gray-600);
             background-image: linear-gradient(
               -45deg,
               var(--background) 15%,
