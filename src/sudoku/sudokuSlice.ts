@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { shallowEqual } from 'react-redux'
 import { AppThunk } from '../store/store'
-import { Sudoku, ResponseType } from './sudokuService'
+import { Sudoku, ResponseType, fetchSudoku } from './sudokuService'
 import checkCollisions from './utils/checkCollisions'
 
 export interface Coords {
@@ -58,6 +58,13 @@ const initialState: SudokuState = {
   marksEnabled: false,
   selectedBox: null,
 }
+
+export const fetchNewSudoku = createAsyncThunk(
+  'sudoku/fetchSudoku',
+  async (difficulty: string) => {
+    return await fetchSudoku(difficulty)
+  },
+)
 
 const sudokuSlice = createSlice({
   name: 'sudoku',
@@ -157,6 +164,20 @@ const sudokuSlice = createSlice({
         }),
       )
     },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchNewSudoku.pending, state => {
+        Object.assign(state, initialState, { loading: true })
+      })
+      .addCase(fetchNewSudoku.fulfilled, (state, { payload: { puzzle, solution } }) => {
+        state.solution = solution
+        state.puzzle = parsePuzzle(puzzle)
+        state.loading = false
+      })
+      .addCase(fetchNewSudoku.rejected, state => {
+        state.loading = false
+      })
   },
 })
 

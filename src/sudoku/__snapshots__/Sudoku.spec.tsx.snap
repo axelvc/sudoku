@@ -285,7 +285,7 @@ exports[`Sudoku component collision feedback should add error styles by collisio
 </button>
 `;
 
-exports[`Sudoku component functionality with controls numpad should add selected styles on click 1`] = `
+exports[`Sudoku component functionality with controls numpad should add selected styles to box with same value as selected numpad 1`] = `
 .c0 {
   display: grid;
   grid-auto-flow: column;

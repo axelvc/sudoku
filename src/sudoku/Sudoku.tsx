@@ -1,35 +1,50 @@
 import { FC, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
-import { difficulties, fetchSudoku } from './sudokuService'
-import { setSudoku, updateLoading, updateSelectedboxOrFillBox } from './sudokuSlice'
+import { difficulties } from './sudokuService'
+import { fetchNewSudoku, updateSelectedboxOrFillBox } from './sudokuSlice'
 
-import Controls from './controls/Controls'
+import Button from '../common/Button'
 import DropDown from '../common/DropDown/DropDown'
+import Modal from '../common/Modal/Modal'
+import Controls from './controls/Controls'
 import Timer from './timer/Timer'
 import { Box, SudokuHeader, Mark, SudokuGrid } from './Sudoku.style'
 import { shallowEqual } from 'react-redux'
 
 const Sudoku: FC = () => {
   const [difficulty, setDifficulty] = useState('easy')
+  const [error, setError] = useState(false)
   const loading = useAppSelector(state => state.loading)
   const puzzle = useAppSelector(state => state.puzzle)
   const numpadValue = useAppSelector(state => state.numpadValue)
   const selectedBox = useAppSelector(state => state.selectedBox)
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    dispatch(updateLoading(true))
+  function newSudoku(): void {
+    dispatch(fetchNewSudoku(difficulty))
+      .unwrap()
+      .catch(() => setError(true))
+  }
 
-    fetchSudoku(difficulty)
-      .then(res => dispatch(setSudoku(res)))
-      .catch(() => {
-        // TODO: handle error
-      })
-      .finally(() => dispatch(updateLoading(false)))
-  }, [difficulty])
+  useEffect(newSudoku, [difficulty])
 
   return (
     <>
+      {error && (
+        <Modal variant="error" title="Error to connect">
+          <p>Please check your network connection and try again</p>
+          <Button
+            size="large"
+            onClick={() => {
+              setError(false)
+              newSudoku()
+            }}
+          >
+            Try again
+          </Button>
+        </Modal>
+      )}
+
       <section>
         <SudokuHeader>
           <Timer />

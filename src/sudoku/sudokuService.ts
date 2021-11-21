@@ -9,8 +9,9 @@ export const difficulties = ['easy', 'medium', 'hard']
 
 // TODO: implement real api
 export async function fetchSudoku(difficulty: string): Promise<ResponseType> {
-  return await new Promise(resolve =>
+  return await new Promise((resolve, reject) =>
     setTimeout(
+      // () => reject(new Error('Not allowed')),
       () =>
         resolve({
           puzzle: [

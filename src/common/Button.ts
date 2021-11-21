@@ -1,11 +1,22 @@
 import styled from 'styled-components'
 
-export default styled.button`
+type size = 'normal' | 'large'
+
+interface ButtonProps {
+  size?: size
+}
+
+const sizes: Record<size, string> = {
+  normal: '2rem',
+  large: '2.5rem',
+}
+
+export default styled.button<ButtonProps>`
   display: grid;
   grid-auto-flow: column;
   gap: 0.25rem;
   place-items: center;
-  min-height: 32px;
+  min-height: ${p => sizes[p.size ?? 'normal']};
   padding: 0 0.75rem;
   font-weight: 600;
   color: var(--color);
@@ -19,6 +30,7 @@ export default styled.button`
 
   &:hover,
   &:focus-visible {
+    color: var(--color-hover);
     background: var(--background-hover);
   }
 
@@ -28,6 +40,7 @@ export default styled.button`
   }
 
   --color: var(--color-blue-400);
+  --color-hover: var(--color);
   --color-active: var(--color-gray-100);
   --background: var(--color-blue-100);
   --background-hover: var(--color-blue-200);
