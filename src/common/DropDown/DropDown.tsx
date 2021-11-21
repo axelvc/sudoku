@@ -61,11 +61,7 @@ const DropDown: FC<Props> = ({ options, selected, onChange }) => {
         <CaretDown />
       </SelectedButton>
       {visible && (
-        <Ul
-          role="listbox"
-          ref={optionList}
-          onMouseOver={ev => (ev.target as HTMLElement).focus()}
-        >
+        <Ul role="listbox" ref={optionList}>
           {options.map((option, i) => (
             <li key={option}>
               <OptionButton
@@ -73,14 +69,13 @@ const DropDown: FC<Props> = ({ options, selected, onChange }) => {
                 role="option"
                 tabIndex={-1}
                 autoFocus={option === selected}
-                ref={el => {
-                  if (el) optionItem.current[i] = el
-                }}
+                ref={el => (optionItem.current[i] = el as HTMLButtonElement)}
                 onClick={() => {
                   onChange?.(option)
                   setVisible(false)
                 }}
                 onKeyDown={ev => arrowKeyNavigate(ev, i)}
+                onMouseEnter={ev => (ev.target as HTMLElement).focus()}
               >
                 {option}
               </OptionButton>
