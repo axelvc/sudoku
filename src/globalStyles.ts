@@ -23,6 +23,7 @@ export default createGlobalStyle`
     --color-red-100: #ffc3c3;
     --color-red-300: #fa9ea0;
     --color-red-500: #da2f35;
+    --color-red-600: #c52329;
     --color-yellow-100: #fcddb6;
     --color-yellow-500: #e2a427;
   }
