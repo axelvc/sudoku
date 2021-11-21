@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 import Switch from '../common/Switch'
 import Grid from '../common/Grid'
 
@@ -13,10 +13,17 @@ export const SudokuGrid = styled(Grid)`
 `
 
 interface BoxProps {
+  isLoading: boolean
   blockIndex: number
   hasMarks: boolean
   error: boolean
 }
+
+const loadingBoxAnimation = keyframes`
+  0% { background-position-x: 0 }
+  30% { background-position-x: 100% }
+  100% { background-position-x: 100% }
+`
 
 export const Box = styled(Switch)<BoxProps>`
   position: relative;
@@ -33,20 +40,34 @@ export const Box = styled(Switch)<BoxProps>`
   --background-active: var(--color-gray-400);
   --disabled-line: var(--color-gray-300);
 
-  &:disabled {
-    background-image: linear-gradient(
-      -45deg,
-      var(--background) 15%,
-      var(--disabled-line) 15% 25%,
-      var(--background) 25% 35%,
-      var(--disabled-line) 35% 45%,
-      var(--background) 45% 55%,
-      var(--disabled-line) 55% 65%,
-      var(--background) 65% 75%,
-      var(--disabled-line) 75% 85%,
-      var(--background) 85%
-    );
-  }
+  ${({ isLoading }) =>
+    isLoading
+      ? css`
+          background-image: linear-gradient(
+            to right,
+            transparent 33%,
+            rgba(0, 0, 0, 0.1),
+            transparent 66%
+          );
+          background-size: 300%;
+          animation: ${loadingBoxAnimation} 2.5s ease-in-out infinite;
+        `
+      : css`
+          &:disabled {
+            background-image: linear-gradient(
+              -45deg,
+              var(--background) 15%,
+              var(--disabled-line) 15% 25%,
+              var(--background) 25% 35%,
+              var(--disabled-line) 35% 45%,
+              var(--background) 45% 55%,
+              var(--disabled-line) 55% 65%,
+              var(--background) 65% 75%,
+              var(--disabled-line) 75% 85%,
+              var(--background) 85%
+            );
+          }
+        `}
 
   &[aria-pressed='true'] {
     --color: var(--color-green-400);

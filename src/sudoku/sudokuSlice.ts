@@ -23,6 +23,7 @@ export interface BoxData {
 interface HistoryData extends Coords, BoxData {}
 
 export interface SudokuState {
+  loading: boolean
   solution: Sudoku
   puzzle: BoxData[][]
   history: HistoryData[]
@@ -49,6 +50,7 @@ function saveHistory(state: SudokuState, data: HistoryData): void {
 }
 
 const initialState: SudokuState = {
+  loading: false,
   solution: Array(9).fill(Array(9).fill(0)),
   puzzle: parsePuzzle(Array(9).fill(Array(9).fill(0))),
   history: [],
@@ -61,6 +63,9 @@ const sudokuSlice = createSlice({
   name: 'sudoku',
   initialState,
   reducers: {
+    updateLoading(state, { payload }: PayloadAction<boolean>) {
+      state.loading = payload
+    },
     setMarksEnabled(state, { payload }: PayloadAction<boolean>) {
       state.marksEnabled = payload
     },
@@ -156,6 +161,7 @@ const sudokuSlice = createSlice({
 })
 
 export const {
+  updateLoading,
   setMarksEnabled,
   updateNumpadValue,
   updateSelectedBox,
