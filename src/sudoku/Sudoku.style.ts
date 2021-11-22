@@ -18,6 +18,11 @@ export const SuccessDifficulty = styled.p`
   text-transform: capitalize;
 `
 
+export const TimerIcon = styled.span`
+  display: flex;
+  height: 1rem;
+`
+
 interface BoxProps {
   isLoading: boolean
   blockIndex: number

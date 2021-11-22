@@ -1,16 +1,25 @@
 import { RootStore } from '../store/store'
-import { regex, render, screen, userEvent } from '../test/utils'
+import { regex, render, screen, userEvent, waitFor } from '../test/utils'
 
 import Sudoku from './Sudoku'
 import { Coords, fillBox } from './sudokuSlice'
 
+let store: RootStore
+
 jest.mock('./sudokuService')
 
-let store: RootStore
-beforeEach(() => {
+beforeAll(() => jest.useFakeTimers())
+afterAll(() => jest.useRealTimers())
+
+beforeEach(async () => {
   const r = render(<Sudoku />)
 
   store = r.store
+
+  // wait to start timer to avoid warning
+  await waitFor(() => {
+    expect(screen.getByRole('timer')).not.toBeDisabled()
+  })
 })
 
 describe('Sudoku component', () => {

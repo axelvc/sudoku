@@ -2,16 +2,26 @@ import { FC, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { difficulties } from './sudokuService'
 import { fetchNewSudoku, updateSelectedboxOrFillBox } from './sudokuSlice'
+import useTimer from './useTimer'
 
 import Button from '../common/Button'
 import DropDown from '../common/DropDown/DropDown'
 import Modal from '../common/Modal/Modal'
 import Controls from './controls/Controls'
-import Timer from './timer/Timer'
-import { Box, SudokuHeader, Mark, SudokuGrid, SuccessDifficulty } from './Sudoku.style'
+import Play from '../common/svg/Play.svg'
+import Pause from '../common/svg/Pause.svg'
+import {
+  Box,
+  SudokuHeader,
+  Mark,
+  SudokuGrid,
+  SuccessDifficulty,
+  TimerIcon,
+} from './Sudoku.style'
 import { shallowEqual } from 'react-redux'
 
 const Sudoku: FC = () => {
+  const { time, running, setRunning, reset: resetTimer } = useTimer()
   const [difficulty, setDifficulty] = useState('easy')
   const [error, setError] = useState(false)
   const loading = useAppSelector(state => state.loading)
@@ -22,8 +32,11 @@ const Sudoku: FC = () => {
   const dispatch = useAppDispatch()
 
   function newSudoku(): void {
+    resetTimer()
+
     dispatch(fetchNewSudoku(difficulty))
       .unwrap()
+      .then(() => setRunning(true))
       .catch(() => setError(true))
   }
 
@@ -49,8 +62,7 @@ const Sudoku: FC = () => {
       {completed && (
         <Modal title="Great job!">
           <div>
-            {/* TODO: get real time */}
-            <p>Time: 00:00</p>
+            <p>Time: {time}</p>
             <SuccessDifficulty>Difficulty: {difficulty}</SuccessDifficulty>
           </div>
           <Button size="large" onClick={newSudoku}>
@@ -61,8 +73,10 @@ const Sudoku: FC = () => {
 
       <section>
         <SudokuHeader>
-          {/* TODO: start timer when get a sudoku */}
-          <Timer />
+          <Button role="timer" disabled={loading} onClick={() => setRunning(!running)}>
+            <TimerIcon>{running ? <Pause /> : <Play />}</TimerIcon>
+            {time}
+          </Button>
           <DropDown
             options={difficulties}
             selected={difficulty}
