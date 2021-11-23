@@ -40,6 +40,11 @@ const Sudoku: FC = () => {
       .catch(() => setError(true))
   }
 
+  useEffect(() => {
+    if (completed) {
+      setRunning(false)
+    }
+  }, [completed])
   useEffect(newSudoku, [difficulty])
 
   return (
