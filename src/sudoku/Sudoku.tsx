@@ -91,13 +91,13 @@ const Sudoku: FC = () => {
                 key={`${row}${col}`}
                 isLoading={loading}
                 data-testid={`box-${row}-${col}`}
+                aria-invalid={box.errors > 0}
                 blockIndex={Math.floor(row / 3) * 3 + Math.floor(col / 3)}
                 hasMarks={box.marks.length >= 1}
                 pressed={Boolean(
                   (numpadValue && numpadValue === box.value) ??
                     (selectedBox && shallowEqual(selectedBox, { row, col })),
                 )}
-                error={box.errors > 0}
                 disabled={loading || box.blocked}
                 onClick={() => dispatch(updateSelectedboxOrFillBox({ row, col }))}
               >

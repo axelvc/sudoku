@@ -131,7 +131,7 @@ describe('Sudoku component', () => {
         expect($box).toHaveTextContent('')
       })
 
-      it('should add error styles on click "validate" control', () => {
+      it('should update arira-error on click "validate" control', () => {
         const $validate = screen.getByRole('button', { name: regex('validate') })
         const $box = screen.getByTestId('box-0-0')
         const $numpad1 = screen.getByTestId('numpad-1')
@@ -140,9 +140,7 @@ describe('Sudoku component', () => {
         userEvent.click($box)
         userEvent.click($validate)
 
-        expect($box).toHaveStyleRule('--color', 'var(--color-red-500)')
-        expect($box).toHaveStyleRule('--background', 'var(--color-red-100)')
-        expect($box).toMatchSnapshot()
+        expect($box).toHaveAttribute('aria-invalid', 'true')
       })
 
       it('should restore value on click "undo" control after set value', () => {

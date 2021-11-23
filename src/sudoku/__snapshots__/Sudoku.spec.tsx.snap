@@ -65,29 +65,37 @@ exports[`Sudoku component collision feedback should add error styles by collisio
   --background-hover: var(--color-gray-300);
   --background-active: var(--color-gray-400);
   --disabled-line: var(--color-gray-300);
-  --color: var(--color-red-500);
-  --background: var(--color-red-100);
-  --background-hover: var(--color-red-300);
-  --color-active: var(--color-gray-100);
-  --background-active: var(--color-red-500);
-  --disabled-line: var(--color-red-300);
+  --background: var(--color-gray-300);
+  --background-hover: var(--color-gray-400);
+  --background-active: var(--color-gray-500);
+  --disabled-line: var(--color-gray-500);
 }
 
 .c2:disabled {
-  color: var(--color-gray-600);
+  --color: var(--color-gray-600);
   background-image: linear-gradient( -45deg, var(--background) 15%, var(--disabled-line) 15% 25%, var(--background) 25% 35%, var(--disabled-line) 35% 45%, var(--background) 45% 55%, var(--disabled-line) 55% 65%, var(--background) 65% 75%, var(--disabled-line) 75% 85%, var(--background) 85% );
 }
 
 .c2[aria-pressed='true'] {
   --color: var(--color-green-400);
+  --color-active: var(--color-gray-100);
   --background: var(--color-green-100);
   --background-hover: var(--color-green-200);
-  --color-active: var(--color-gray-100);
   --background-active: var(--color-green-400);
   --disabled-line: var(--color-green-200);
 }
 
+.c2[aria-invalid='true'] {
+  --color: var(--color-red-500);
+  --color-active: var(--color-gray-100);
+  --background: var(--color-red-100);
+  --background-hover: var(--color-red-300);
+  --background-active: var(--color-red-500);
+  --disabled-line: var(--color-red-300);
+}
+
 <button
+  aria-invalid="true"
   aria-pressed="false"
   class="c0 c1 c2"
   data-testid="box-0-0"
@@ -163,29 +171,37 @@ exports[`Sudoku component collision feedback should add error styles by collisio
   --background-hover: var(--color-gray-300);
   --background-active: var(--color-gray-400);
   --disabled-line: var(--color-gray-300);
-  --color: var(--color-red-500);
-  --background: var(--color-red-100);
-  --background-hover: var(--color-red-300);
-  --color-active: var(--color-gray-100);
-  --background-active: var(--color-red-500);
-  --disabled-line: var(--color-red-300);
+  --background: var(--color-gray-300);
+  --background-hover: var(--color-gray-400);
+  --background-active: var(--color-gray-500);
+  --disabled-line: var(--color-gray-500);
 }
 
 .c2:disabled {
-  color: var(--color-gray-600);
+  --color: var(--color-gray-600);
   background-image: linear-gradient( -45deg, var(--background) 15%, var(--disabled-line) 15% 25%, var(--background) 25% 35%, var(--disabled-line) 35% 45%, var(--background) 45% 55%, var(--disabled-line) 55% 65%, var(--background) 65% 75%, var(--disabled-line) 75% 85%, var(--background) 85% );
 }
 
 .c2[aria-pressed='true'] {
   --color: var(--color-green-400);
+  --color-active: var(--color-gray-100);
   --background: var(--color-green-100);
   --background-hover: var(--color-green-200);
-  --color-active: var(--color-gray-100);
   --background-active: var(--color-green-400);
   --disabled-line: var(--color-green-200);
 }
 
+.c2[aria-invalid='true'] {
+  --color: var(--color-red-500);
+  --color-active: var(--color-gray-100);
+  --background: var(--color-red-100);
+  --background-hover: var(--color-red-300);
+  --background-active: var(--color-red-500);
+  --disabled-line: var(--color-red-300);
+}
+
 <button
+  aria-invalid="true"
   aria-pressed="false"
   class="c0 c1 c2"
   data-testid="box-0-0"
@@ -261,29 +277,37 @@ exports[`Sudoku component collision feedback should add error styles by collisio
   --background-hover: var(--color-gray-300);
   --background-active: var(--color-gray-400);
   --disabled-line: var(--color-gray-300);
-  --color: var(--color-red-500);
-  --background: var(--color-red-100);
-  --background-hover: var(--color-red-300);
-  --color-active: var(--color-gray-100);
-  --background-active: var(--color-red-500);
-  --disabled-line: var(--color-red-300);
+  --background: var(--color-gray-300);
+  --background-hover: var(--color-gray-400);
+  --background-active: var(--color-gray-500);
+  --disabled-line: var(--color-gray-500);
 }
 
 .c2:disabled {
-  color: var(--color-gray-600);
+  --color: var(--color-gray-600);
   background-image: linear-gradient( -45deg, var(--background) 15%, var(--disabled-line) 15% 25%, var(--background) 25% 35%, var(--disabled-line) 35% 45%, var(--background) 45% 55%, var(--disabled-line) 55% 65%, var(--background) 65% 75%, var(--disabled-line) 75% 85%, var(--background) 85% );
 }
 
 .c2[aria-pressed='true'] {
   --color: var(--color-green-400);
+  --color-active: var(--color-gray-100);
   --background: var(--color-green-100);
   --background-hover: var(--color-green-200);
-  --color-active: var(--color-gray-100);
   --background-active: var(--color-green-400);
   --disabled-line: var(--color-green-200);
 }
 
+.c2[aria-invalid='true'] {
+  --color: var(--color-red-500);
+  --color-active: var(--color-gray-100);
+  --background: var(--color-red-100);
+  --background-hover: var(--color-red-300);
+  --background-active: var(--color-red-500);
+  --disabled-line: var(--color-red-300);
+}
+
 <button
+  aria-invalid="true"
   aria-pressed="false"
   class="c0 c1 c2"
   data-testid="box-0-0"
@@ -359,121 +383,37 @@ exports[`Sudoku component functionality with controls numpad should add selected
   --background-hover: var(--color-gray-300);
   --background-active: var(--color-gray-400);
   --disabled-line: var(--color-gray-300);
+  --background: var(--color-gray-300);
+  --background-hover: var(--color-gray-400);
+  --background-active: var(--color-gray-500);
+  --disabled-line: var(--color-gray-500);
 }
 
 .c2:disabled {
-  color: var(--color-gray-600);
+  --color: var(--color-gray-600);
   background-image: linear-gradient( -45deg, var(--background) 15%, var(--disabled-line) 15% 25%, var(--background) 25% 35%, var(--disabled-line) 35% 45%, var(--background) 45% 55%, var(--disabled-line) 55% 65%, var(--background) 65% 75%, var(--disabled-line) 75% 85%, var(--background) 85% );
 }
 
 .c2[aria-pressed='true'] {
   --color: var(--color-green-400);
+  --color-active: var(--color-gray-100);
   --background: var(--color-green-100);
   --background-hover: var(--color-green-200);
-  --color-active: var(--color-gray-100);
   --background-active: var(--color-green-400);
   --disabled-line: var(--color-green-200);
 }
 
-<button
-  aria-pressed="true"
-  class="c0 c1 c2"
-  data-testid="box-0-0"
->
-  <span>
-    1
-  </span>
-</button>
-`;
-
-exports[`Sudoku component functionality with controls utils should add error styles on click "validate" control 1`] = `
-.c0 {
-  display: grid;
-  grid-auto-flow: column;
-  gap: 0.25rem;
-  place-items: center;
-  min-height: 2rem;
-  padding: 0 0.75rem;
-  font-weight: 600;
-  color: var(--color);
-  text-transform: capitalize;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background: var(--background);
-  border-radius: 0.5rem;
-  outline-color: var(--color);
-  -webkit-transition: 100ms ease-out;
-  transition: 100ms ease-out;
-  -webkit-transition-property: background,color;
-  transition-property: background,color;
-  --color: var(--color-blue-400);
-  --color-hover: var(--color);
-  --color-active: var(--color-gray-100);
-  --background: var(--color-blue-100);
-  --background-hover: var(--color-blue-200);
-  --background-active: var(--color-blue-400);
-}
-
-.c0:hover,
-.c0:focus-visible {
-  color: var(--color-hover);
-  background: var(--background-hover);
-}
-
-.c0:active {
-  color: var(--color-active);
-  background: var(--background-active);
-}
-
-.c1[aria-pressed='true'] {
-  --color: var(--color-gray-100);
-  --background: var(--color-blue-400);
-  --background-hover: var(--color-blue-500);
-  --background-active: var(--color-blue-600);
-}
-
-.c1[aria-pressed='true']:focus {
-  outline-color: var(--color-gray-900);
-}
-
-.c2 {
-  position: relative;
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  font-weight: 700;
-  border-radius: 0.2rem;
-  --color: var(--color-gray-900);
-  --color-active: var(--color-gray-900);
-  --background: var(--color-gray-200);
-  --background-hover: var(--color-gray-300);
-  --background-active: var(--color-gray-400);
-  --disabled-line: var(--color-gray-300);
+.c2[aria-invalid='true'] {
   --color: var(--color-red-500);
+  --color-active: var(--color-gray-100);
   --background: var(--color-red-100);
   --background-hover: var(--color-red-300);
-  --color-active: var(--color-gray-100);
   --background-active: var(--color-red-500);
   --disabled-line: var(--color-red-300);
 }
 
-.c2:disabled {
-  color: var(--color-gray-600);
-  background-image: linear-gradient( -45deg, var(--background) 15%, var(--disabled-line) 15% 25%, var(--background) 25% 35%, var(--disabled-line) 35% 45%, var(--background) 45% 55%, var(--disabled-line) 55% 65%, var(--background) 65% 75%, var(--disabled-line) 75% 85%, var(--background) 85% );
-}
-
-.c2[aria-pressed='true'] {
-  --color: var(--color-green-400);
-  --background: var(--color-green-100);
-  --background-hover: var(--color-green-200);
-  --color-active: var(--color-gray-100);
-  --background-active: var(--color-green-400);
-  --disabled-line: var(--color-green-200);
-}
-
 <button
+  aria-invalid="false"
   aria-pressed="true"
   class="c0 c1 c2"
   data-testid="box-0-0"

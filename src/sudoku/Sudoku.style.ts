@@ -27,7 +27,6 @@ interface BoxProps {
   isLoading: boolean
   blockIndex: number
   hasMarks: boolean
-  error: boolean
 }
 
 const loadingBoxAnimation = keyframes`
@@ -51,8 +50,8 @@ export const Box = styled(Switch)<BoxProps>`
   --background-active: var(--color-gray-400);
   --disabled-line: var(--color-gray-300);
 
-  ${({ isLoading }) =>
-    isLoading
+  ${p =>
+    p.isLoading
       ? css`
           background-image: linear-gradient(
             to right,
@@ -65,7 +64,6 @@ export const Box = styled(Switch)<BoxProps>`
         `
       : css`
           &:disabled {
-            color: var(--color-gray-600);
             background-image: linear-gradient(
               -45deg,
               var(--background) 15%,
@@ -78,42 +76,41 @@ export const Box = styled(Switch)<BoxProps>`
               var(--disabled-line) 75% 85%,
               var(--background) 85%
             );
+
+            --color: var(--color-gray-600);
           }
         `}
 
   &[aria-pressed='true'] {
     --color: var(--color-green-400);
+    --color-active: var(--color-gray-100);
     --background: var(--color-green-100);
     --background-hover: var(--color-green-200);
-    --color-active: var(--color-gray-100);
     --background-active: var(--color-green-400);
     --disabled-line: var(--color-green-200);
   }
 
-  ${({ blockIndex }) =>
-    Boolean(blockIndex % 2) &&
+  &[aria-invalid='true'] {
+    --color: var(--color-red-500);
+    --color-active: var(--color-gray-100);
+    --background: var(--color-red-100);
+    --background-hover: var(--color-red-300);
+    --background-active: var(--color-red-500);
+    --disabled-line: var(--color-red-300);
+  }
+
+  ${p =>
+    p.blockIndex % 2 === 0 &&
     css`
-      /* stylelint-ignore */
+      /* stylelint-disable-next-line custom-property-empty-line-before */
       --background: var(--color-gray-300);
       --background-hover: var(--color-gray-400);
       --background-active: var(--color-gray-500);
       --disabled-line: var(--color-gray-500);
     `}
 
-  ${({ error }) =>
-    error &&
-    css`
-      /* stylelint-ignore */
-      --color: var(--color-red-500);
-      --background: var(--color-red-100);
-      --background-hover: var(--color-red-300);
-      --color-active: var(--color-gray-100);
-      --background-active: var(--color-red-500);
-      --disabled-line: var(--color-red-300);
-    `}
-
-  ${({ hasMarks }) =>
-    hasMarks &&
+  ${p =>
+    p.hasMarks &&
     css`
       grid-template:
         'n1 n2 n3' 1fr
