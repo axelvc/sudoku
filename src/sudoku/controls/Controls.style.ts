@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { breakpoints, fancyBox, roundedGrid } from '../../styles/utils'
 
 import Button from '../../common/Button'
 import Switch from '../../common/Switch'
@@ -9,12 +10,40 @@ export const Section = styled.section`
   gap: 1.5rem;
   align-content: flex-start;
   margin: 0 1.5rem 1.5rem;
+
+  @media (min-width: ${breakpoints.md}) {
+    grid-template: auto / auto;
+    place-items: center;
+    margin: 0;
+  }
+`
+
+export const ControlsContainer = styled.div`
+  @media (min-width: ${breakpoints.md}) {
+    ${fancyBox};
+  }
+`
+
+export const UtilsControls = styled.div`
+  ${roundedGrid(3, 2)};
+
+  @media (min-width: ${breakpoints.md}) {
+    ${roundedGrid(2, 3)};
+  }
+`
+
+export const NumpadControls = styled.div`
+  ${roundedGrid(3, 3)};
 `
 
 const controlStyles = css`
   aspect-ratio: 1;
   font-size: 1.5rem;
   border-radius: 0.125rem;
+
+  @media (min-width: ${breakpoints.md}) {
+    width: 3rem;
+  }
 `
 
 export const ControlButton = styled(Button)`

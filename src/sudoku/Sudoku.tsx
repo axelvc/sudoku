@@ -12,10 +12,11 @@ import Play from '../common/svg/Play.svg'
 import Pause from '../common/svg/Pause.svg'
 import {
   Box,
-  SudokuHeader,
   Mark,
-  SudokuGrid,
   SuccessDifficulty,
+  SudokuContainer,
+  SudokuGrid,
+  SudokuHeader,
   TimerIcon,
 } from './Sudoku.style'
 import { shallowEqual } from 'react-redux'
@@ -76,7 +77,7 @@ const Sudoku: FC = () => {
         </Modal>
       )}
 
-      <section>
+      <SudokuContainer>
         <SudokuHeader>
           <Button role="timer" disabled={loading} onClick={() => setRunning(!running)}>
             <TimerIcon>{running ? <Pause /> : <Play />}</TimerIcon>
@@ -89,7 +90,7 @@ const Sudoku: FC = () => {
           />
         </SudokuHeader>
 
-        <SudokuGrid rows={9} cols={9}>
+        <SudokuGrid>
           {puzzle.map((arr, row) =>
             arr.map((box, col) => (
               <Box
@@ -119,7 +120,7 @@ const Sudoku: FC = () => {
             )),
           )}
         </SudokuGrid>
-      </section>
+      </SudokuContainer>
 
       <Controls />
     </>

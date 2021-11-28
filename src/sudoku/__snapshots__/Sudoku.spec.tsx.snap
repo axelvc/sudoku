@@ -57,6 +57,7 @@ exports[`Sudoku component collision feedback should add error styles by collisio
   aspect-ratio: 1;
   display: grid;
   place-items: center;
+  padding: 0;
   font-weight: 700;
   border-radius: 0.2rem;
   --color: var(--color-gray-900);
@@ -72,8 +73,8 @@ exports[`Sudoku component collision feedback should add error styles by collisio
 }
 
 .c2:disabled {
-  --color: var(--color-gray-600);
   background-image: linear-gradient( -45deg, var(--background) 15%, var(--disabled-line) 15% 25%, var(--background) 25% 35%, var(--disabled-line) 35% 45%, var(--background) 45% 55%, var(--disabled-line) 55% 65%, var(--background) 65% 75%, var(--disabled-line) 75% 85%, var(--background) 85% );
+  --color: var(--color-gray-600);
 }
 
 .c2[aria-pressed='true'] {
@@ -92,6 +93,60 @@ exports[`Sudoku component collision feedback should add error styles by collisio
   --background-hover: var(--color-red-300);
   --background-active: var(--color-red-500);
   --disabled-line: var(--color-red-300);
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+  .c2 {
+    width: 2.5rem;
+  }
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
 }
 
 <button
@@ -163,6 +218,7 @@ exports[`Sudoku component collision feedback should add error styles by collisio
   aspect-ratio: 1;
   display: grid;
   place-items: center;
+  padding: 0;
   font-weight: 700;
   border-radius: 0.2rem;
   --color: var(--color-gray-900);
@@ -178,8 +234,8 @@ exports[`Sudoku component collision feedback should add error styles by collisio
 }
 
 .c2:disabled {
-  --color: var(--color-gray-600);
   background-image: linear-gradient( -45deg, var(--background) 15%, var(--disabled-line) 15% 25%, var(--background) 25% 35%, var(--disabled-line) 35% 45%, var(--background) 45% 55%, var(--disabled-line) 55% 65%, var(--background) 65% 75%, var(--disabled-line) 75% 85%, var(--background) 85% );
+  --color: var(--color-gray-600);
 }
 
 .c2[aria-pressed='true'] {
@@ -198,6 +254,60 @@ exports[`Sudoku component collision feedback should add error styles by collisio
   --background-hover: var(--color-red-300);
   --background-active: var(--color-red-500);
   --disabled-line: var(--color-red-300);
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+  .c2 {
+    width: 2.5rem;
+  }
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
 }
 
 <button
@@ -269,6 +379,7 @@ exports[`Sudoku component collision feedback should add error styles by collisio
   aspect-ratio: 1;
   display: grid;
   place-items: center;
+  padding: 0;
   font-weight: 700;
   border-radius: 0.2rem;
   --color: var(--color-gray-900);
@@ -284,8 +395,8 @@ exports[`Sudoku component collision feedback should add error styles by collisio
 }
 
 .c2:disabled {
-  --color: var(--color-gray-600);
   background-image: linear-gradient( -45deg, var(--background) 15%, var(--disabled-line) 15% 25%, var(--background) 25% 35%, var(--disabled-line) 35% 45%, var(--background) 45% 55%, var(--disabled-line) 55% 65%, var(--background) 65% 75%, var(--disabled-line) 75% 85%, var(--background) 85% );
+  --color: var(--color-gray-600);
 }
 
 .c2[aria-pressed='true'] {
@@ -304,6 +415,60 @@ exports[`Sudoku component collision feedback should add error styles by collisio
   --background-hover: var(--color-red-300);
   --background-active: var(--color-red-500);
   --disabled-line: var(--color-red-300);
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+  .c2 {
+    width: 2.5rem;
+  }
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
 }
 
 <button
@@ -375,6 +540,7 @@ exports[`Sudoku component functionality with controls numpad should add selected
   aspect-ratio: 1;
   display: grid;
   place-items: center;
+  padding: 0;
   font-weight: 700;
   border-radius: 0.2rem;
   --color: var(--color-gray-900);
@@ -390,8 +556,8 @@ exports[`Sudoku component functionality with controls numpad should add selected
 }
 
 .c2:disabled {
-  --color: var(--color-gray-600);
   background-image: linear-gradient( -45deg, var(--background) 15%, var(--disabled-line) 15% 25%, var(--background) 25% 35%, var(--disabled-line) 35% 45%, var(--background) 45% 55%, var(--disabled-line) 55% 65%, var(--background) 65% 75%, var(--disabled-line) 75% 85%, var(--background) 85% );
+  --color: var(--color-gray-600);
 }
 
 .c2[aria-pressed='true'] {
@@ -410,6 +576,60 @@ exports[`Sudoku component functionality with controls numpad should add selected
   --background-hover: var(--color-red-300);
   --background-active: var(--color-red-500);
   --disabled-line: var(--color-red-300);
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+  .c2 {
+    width: 2.5rem;
+  }
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
 }
 
 <button

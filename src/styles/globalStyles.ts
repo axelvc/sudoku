@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { breakpoints } from './utils'
 
 export default createGlobalStyle`
   :root {
@@ -39,6 +40,10 @@ export default createGlobalStyle`
     color: var(--color-gray-900);
     letter-spacing: 0.03rem;
     background: var(--color-gray-100);
+
+    @media (min-width: ${breakpoints.md}) {
+      background: var(--color-gray-900);
+    }
   }
 
   main {
@@ -46,6 +51,11 @@ export default createGlobalStyle`
     grid-template-rows: auto 1fr;
     gap: 1.5rem;
     min-height: 100vh;
+
+    @media (min-width: ${breakpoints.md}) {
+      grid-template: auto / auto auto;
+      place-content: center;
+    }
   }
 
   button {

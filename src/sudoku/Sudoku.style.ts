@@ -1,15 +1,35 @@
 import styled, { css, keyframes } from 'styled-components'
+import { breakpoints, fancyBox, roundedGrid } from '../styles/utils'
+
 import Switch from '../common/Switch'
-import Grid from '../common/Grid'
+
+export const SudokuContainer = styled.div`
+  @media (min-width: ${breakpoints.md}) {
+    ${fancyBox};
+
+    display: grid;
+    gap: 0.75rem;
+  }
+`
 
 export const SudokuHeader = styled.header`
   display: flex;
   justify-content: space-between;
   margin: 0.75rem;
+
+  @media (min-width: ${breakpoints.md}) {
+    margin: 0;
+  }
 `
 
-export const SudokuGrid = styled(Grid)`
+export const SudokuGrid = styled.div`
+  ${roundedGrid(9, 9)};
+
   margin: 0.5rem;
+
+  @media (min-width: ${breakpoints.md}) {
+    margin: 0;
+  }
 `
 
 export const SuccessDifficulty = styled.p`
@@ -40,6 +60,7 @@ export const Box = styled(Switch)<BoxProps>`
   aspect-ratio: 1;
   display: grid;
   place-items: center;
+  padding: 0;
   font-weight: 700;
   border-radius: 0.2rem;
 
@@ -49,6 +70,10 @@ export const Box = styled(Switch)<BoxProps>`
   --background-hover: var(--color-gray-300);
   --background-active: var(--color-gray-400);
   --disabled-line: var(--color-gray-300);
+
+  @media (min-width: ${breakpoints.md}) {
+    width: 2.5rem;
+  }
 
   ${p =>
     p.isLoading
