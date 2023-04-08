@@ -1,3 +1,5 @@
+import sudoku from 'sudoku'
+
 export type Sudoku = number[][]
 
 export interface ResponseType {
@@ -5,27 +7,29 @@ export interface ResponseType {
   solution: Sudoku
 }
 
-const API = 'https://sugoku.herokuapp.com'
-
 export const difficulties = ['easy', 'medium', 'hard']
 
-async function getSudoku(difficulty: string): Promise<Sudoku> {
-  const res = await fetch(`${API}/board?difficulty=${difficulty}`)
-  const { board } = await res.json()
+function makeChunks<T>(arr: T[], chunkSize: number): T[][] {
+  const chunks: T[][] = []
 
-  return board
+  for (let i = 0; i < arr.length; i += chunkSize) {
+    chunks.push(arr.slice(i, i + chunkSize))
+  }
+
+  return chunks
+}
+
+async function getSudoku(_difficulty: string): Promise<Sudoku> {
+  const puzzle = sudoku.makepuzzle()
+
+  console.log(sudoku.ratepuzzle(puzzle, 4))
+
+  return makeChunks(puzzle, 9)
 }
 
 async function getSolution(puzzle: Sudoku): Promise<Sudoku> {
-  const opts = {
-    method: 'POST',
-    body: new URLSearchParams({ board: JSON.stringify(puzzle) }),
-  }
-
-  const res = await fetch(`${API}/solve`, opts)
-  const { solution } = await res.json()
-
-  return solution
+  const solution = sudoku.solvepuzzle(puzzle.flat())
+  return makeChunks(solution, 9)
 }
 
 export async function fetchSudoku(difficulty: string): Promise<ResponseType> {

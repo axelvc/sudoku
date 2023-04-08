@@ -39,7 +39,7 @@ function parsePuzzle(puzzle: Sudoku): BoxData[][] {
       value,
       marks: [],
       errors: 0,
-      blocked: value !== 0,
+      blocked: Boolean(value),
     })),
   )
 }

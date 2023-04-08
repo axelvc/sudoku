@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
-import { difficulties } from './sudokuService'
+// import { difficulties } from './sudokuService'
 import { fetchNewSudoku, updateSelectedboxOrFillBox } from './sudokuSlice'
 import useTimer from './useTimer'
 
 import Button from '../common/Button'
-import DropDown from '../common/DropDown/DropDown'
+// import DropDown from '../common/DropDown/DropDown'
 import Modal from '../common/Modal/Modal'
 import Controls from './controls/Controls'
 import Play from '../common/svg/Play.svg'
@@ -13,7 +13,7 @@ import Pause from '../common/svg/Pause.svg'
 import {
   Box,
   Mark,
-  SuccessDifficulty,
+  // SuccessDifficulty,
   SudokuContainer,
   SudokuGrid,
   SudokuHeader,
@@ -23,7 +23,7 @@ import { shallowEqual } from 'react-redux'
 
 const Sudoku: FC = () => {
   const { time, running, setRunning, reset: resetTimer } = useTimer()
-  const [difficulty, setDifficulty] = useState('easy')
+  const [difficulty] = useState('easy')
   const [error, setError] = useState(false)
   const loading = useAppSelector(state => state.loading)
   const completed = useAppSelector(state => state.completed)
@@ -69,7 +69,7 @@ const Sudoku: FC = () => {
         <Modal title="Great job!">
           <div>
             <p>Time: {time}</p>
-            <SuccessDifficulty>Difficulty: {difficulty}</SuccessDifficulty>
+            {/* <SuccessDifficulty>Difficulty: {difficulty}</SuccessDifficulty> */}
           </div>
           <Button size="large" onClick={newSudoku}>
             Let's do again
@@ -83,11 +83,11 @@ const Sudoku: FC = () => {
             <TimerIcon>{running ? <Pause /> : <Play />}</TimerIcon>
             {time}
           </Button>
-          <DropDown
-            options={difficulties}
-            selected={difficulty}
-            onChange={value => setDifficulty(value)}
-          />
+          {/* <DropDown */}
+          {/*   options={difficulties} */}
+          {/*   selected={difficulty} */}
+          {/*   onChange={value => setDifficulty(value)} */}
+          {/* /> */}
         </SudokuHeader>
 
         <SudokuGrid>
